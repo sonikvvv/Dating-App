@@ -2,7 +2,7 @@
 
 <section class="container">
   <img src="" alt="" />
-  <h2>Badge Name</h2>
+  <h2><%= badge.title %></h2>
   <p>
     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor eos officia
     atque aut voluptas molestias voluptates, nemo earum sequi tempore molestiae
@@ -16,4 +16,9 @@
       <li>Badge 4</li>
       <li>Badge 5</li>
   </ul>
+  <form action="/badges/<%= badge._id %>?_method=DELETE" method="POST">
+    <button>Delete</button>
+  </form>
+  <a href="/badges/<%= badge._id %>/edit">edit</a>
+  <a href="/badges">All</a>
 </section>

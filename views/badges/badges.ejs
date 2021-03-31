@@ -1,5 +1,12 @@
 <% layout('layouts/boilerplate') %>
 
     <section class="container">
-        <h1>Badges</h1>
+        <a href="/badges/new">ADD</a>
+        <ul>
+            <% for ( let badge of badges) { %>
+                <li>
+                    <a href="/badges/<%= badge._id %>"><%= badge.title %></a>
+                </li>
+                <% } %>
+        </ul>
     </section>
