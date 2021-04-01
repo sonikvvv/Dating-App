@@ -1,29 +1,12 @@
 <% layout('layouts/boilerplate') %>
 
 <section class="container">
+  <a href="/rules/new">New</a>
   <h1>Rules</h1>
-  <h2>Pravilo1</h2><h3>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. A officia, ratione
-    laborum tempora rerum similique necessitatibus, aut consectetur earum enim
-    aspernatur! Exercitationem ut expedita possimus et delectus itaque enim
-    illo.
-  </h3></h2>
-  <h2>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. A officia, ratione
-    laborum tempora rerum similique necessitatibus, aut consectetur earum enim
-    aspernatur! Exercitationem ut expedita possimus et delectus itaque enim
-    illo.
-  </h2>
-  <h2>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. A officia, ratione
-    laborum tempora rerum similique necessitatibus, aut consectetur earum enim
-    aspernatur! Exercitationem ut expedita possimus et delectus itaque enim
-    illo.
-  </h2>
-  <h2>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. A officia, ratione
-    laborum tempora rerum similique necessitatibus, aut consectetur earum enim
-    aspernatur! Exercitationem ut expedita possimus et delectus itaque enim
-    illo.
-  </h2>
+  <% for( let rule of rules ) { %>
+    <div>
+      <a href="/rules/<%= rule._id %>"><%= rule.title %></a>
+      <p><%= rule.description %> </p>
+    </div>
+    <% } %>
 </section>

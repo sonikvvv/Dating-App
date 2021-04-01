@@ -1,0 +1,11 @@
+<% layout('layouts/boilerplate') %>
+
+<div>
+    <h2><%= rule.title %></h2>
+    <p><%= rule.description %></p>
+    <a href="/rules">all</a>
+    <a href="/rules/<%= rule._id %>/edit">edit</a>
+    <form action="/rules/<%= rule._id %>?_method=DELETE" method="POST">
+        <button>Delete</button>
+    </form>
+</div>
