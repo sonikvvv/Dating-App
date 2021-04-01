@@ -4,11 +4,14 @@ const path = require('path');
 const mongoose = require('mongoose');
 const Badge = require('./models/badgeModel');
 const methodOverride = require('method-override');
+const Rule = require('./models/ruleModel');
+const Tag = require('./models/tagModel');
 
 mongoose.connect('mongodb://localhost:27017/dating-app', {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 });
 
 const db = mongoose.connection;
@@ -37,7 +40,7 @@ app.get('/badges', async (req, res) => {
     res.render('badges/badges', { badges });
 });
 
-app.get('/badges/new', async (req, res) => {
+app.get('/badges/new', (req, res) => {
     res.render('badges/new');
 });
 
@@ -71,9 +74,83 @@ app.delete("/badges/:id", async (req, res) => {
 
 ////
 
-app.get('/rules', (req, res) => {
-    res.render('rules/rules');
+app.get('/rules', async (req, res) => {
+    const rules = await Rule.find({});
+    res.render("rules/rules", { rules });
 });
+
+app.get('/rules/new', (req, res) => {
+    res.render('rules/newRules');
+});
+
+app.post("/rules", async (req, res) => {
+    const rule = new Rule({ ...req.body.rule });
+    await rule.save();
+    res.redirect(`/rules/${rule._id}`);
+});
+
+app.get('/rules/:id', async (req, res) => {
+    const rule = await Rule.findById(req.params.id);
+    res.render('rules/rule', { rule });
+});
+
+app.get('/rules/:id/edit', async (req, res) => {
+    const rule = await Rule.findById(req.params.id);
+    res.render('rules/edit', { rule });
+});
+
+app.put("/rules/:id", async (req, res) => {
+    const { id } = req.params;
+    const rule = await Rule.findByIdAndUpdate(id, { ...req.body.rule });
+    res.redirect(`/rules/${rule._id}`);
+});
+
+app.delete("/rules/:id", async (req, res) => {
+    const { id } = req.params;
+    const rule = await Rule.findByIdAndDelete(id);
+    res.redirect("/rules");
+});
+
+////
+
+app.get('/tags', async (req, res) => {
+    const tags = await Tag.find({});
+    res.render("tags/tags", { tags });
+})
+
+app.get("/tags/new", (req, res) => {
+    res.render("tags/new");
+});
+
+app.post("/tags", async (req, res) => {
+    const tag = new Tag({ ...req.body.tag });
+    await tag.save();
+    res.redirect(`/tags/${tag._id}`);
+});
+
+app.get("/tags/:id", async (req, res) => {
+    const tag = await Tag.findById(req.params.id);
+    res.render("tags/tag", { tag });
+});
+
+app.get("/tags/:id/edit", async (req, res) => {
+    const tag = await Tag.findById(req.params.id);
+    res.render("tags/edit", { tag });
+});
+
+app.put("/tags/:id", async (req, res) => {
+    const { id } = req.params;
+    const tag = await Tag.findByIdAndUpdate(id, { ...req.body.tag });
+    res.redirect(`/tags/${tag._id}`);
+});
+
+app.delete("/tags/:id", async (req, res) => {
+    const { id } = req.params;
+    const tag = await Tag.findByIdAndDelete(id);
+    res.redirect("/tags");
+});
+
+////
 
 app.get('/login', (req, res) => {
     res.render('log-reg/login');
