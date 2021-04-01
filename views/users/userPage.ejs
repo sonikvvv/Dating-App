@@ -1,30 +1,34 @@
 <% layout('layouts/boilerplate') %>
 
 <section class="container">
-	<img src="" alt="" />
-	<h2><%= user.firstName %></h2>
-	<p><%= user.description %></p>
-	<section>
-		<% for( let tag of user.tags ) { %>
-			<div>
-				<%= tag.title %>
-			</div>
-			<% } %>
-	</section>
-	<section>
-		<ul>
-			<li>Sex:</li>
-			<li>Country:</li>
-			<li>Education:</li>
-			<li>Work:</li>
-			<li>Orientation:</li>
-			<li>Hobbies:</li>
-			<li>Searching:</li>
-		</ul>
-	</section>
-	<a href="/user/<%= user._id %>/edit">Edit</a>
-	<a href="/users">all</a>
-	<form action="/users/<%= user._id %>?_method=DELETE" method="post">
-		<button>delete</button>
-	</form>
+    <img src="" alt="" />
+    <h2><%= user.firstName %> Level:<%= user.level %></h2>
+
+    <p><%= user.description %></p>
+    <section>
+        <% for( let tag of user.tags ) { %>
+        <div><%= tag.title %></div>
+        <% } %>
+    </section>
+    <section>
+        <ul>
+            <li>Sex:<%= user.sex %></li>
+            <li>Work:<%= user.work %></li>
+            <li>Orientation:<%= user.orientation %></li>
+            <li>Age:<%= user.years %></li>
+            <li>Tags:<%= user.tags %></li>
+            <li>Position:<%= user.position %></li>
+            <li>Height:<%= user.height %></li>
+            <li>Weight:<%= user.weight %></li>
+            <li>BodyType:<%= user.bodyType %></li>
+            <li>RelationshipStatus:<%= user.relationshipStatus %></li>
+            <li>NSFW:<%= user.nsfw %></li>
+            <li>SocialLinks:<%= user.socialLincks %></li>
+        </ul>
+    </section>
+    <a href="/user/<%= user._id %>/edit">Edit</a>
+    <a href="/users">all</a>
+    <form action="/users/<%= user._id %>?_method=DELETE" method="post">
+        <button>delete</button>
+    </form>
 </section>
