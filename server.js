@@ -6,6 +6,7 @@ const Badge = require('./models/badgeModel');
 const methodOverride = require('method-override');
 const Rule = require('./models/ruleModel');
 const Tag = require('./models/tagModel');
+const User = require('./models/userModel');
 
 mongoose.connect('mongodb://localhost:27017/dating-app', {
     useNewUrlParser: true,
@@ -151,13 +152,50 @@ app.delete("/tags/:id", async (req, res) => {
 });
 
 ////
+app.get('/register', (req, res) => {
+    res.render('log-reg/register');
+});
+
+app.post('/register', async (req, res) => {
+    const user = new User({ ...req.body.user });
+    user.save();
+    res.redirect(`/users/${user._id}`);
+});
+
+////
+
+app.get("/users", async (req, res) => {
+    const users = await User.find({});
+    res.render("users/users", { users });
+});
+
+app.get('/users/:id', async (req, res) => {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    res.render('users/userPage', {user});
+});
+
+app.get("/user/:id/edit", async (req, res) => {
+    const user = await User.findById(req.params.id);
+    res.render("users/edit", { user });
+});
+
+app.put('/users/:id', async (req, res) => {
+    const { id } = req.params;
+    const user = await User.findByIdAndUpdate(id, { ...req.body.user });
+    res.render('users/userPage', {user});
+});
+
+app.delete("/users/:id", async (req, res) => {
+    const { id } = req.params;
+    const user = await User.findByIdAndDelete(id);
+    res.redirect('/users');
+});
+
+////
 
 app.get('/login', (req, res) => {
     res.render('log-reg/login');
-});
-
-app.get('/register', (req, res) => {
-    res.render('log-reg/register');
 });
 
 app.listen(3000, () => {
