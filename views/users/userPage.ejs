@@ -1,27 +1,30 @@
 <% layout('layouts/boilerplate') %>
 
 <section class="container">
-  <img src="" alt="" />
-  <h2></h2>
-  <p>Description...</p>
-  <section>
-    <div>tag</div>
-    <div>tag</div>
-    <div>tag</div>
-    <div>tag</div>
-    <div>tag</div>
-    <div>tag</div>
-    <div>tag</div>
-  </section>
-  <section>
-    <ul>
-      <li>Sex:</li>
-      <li>Country:</li>
-      <li>Education:</li>
-      <li>Work:</li>
-      <li>Orientation:</li>
-      <li>Hobbies:</li>
-      <li>Searching:</li>
-    </ul>
-  </section>
+	<img src="" alt="" />
+	<h2><%= user.firstName %></h2>
+	<p><%= user.description %></p>
+	<section>
+		<% for( let tag of user.tags ) { %>
+			<div>
+				<%= tag.title %>
+			</div>
+			<% } %>
+	</section>
+	<section>
+		<ul>
+			<li>Sex:</li>
+			<li>Country:</li>
+			<li>Education:</li>
+			<li>Work:</li>
+			<li>Orientation:</li>
+			<li>Hobbies:</li>
+			<li>Searching:</li>
+		</ul>
+	</section>
+	<a href="/user/<%= user._id %>/edit">Edit</a>
+	<a href="/users">all</a>
+	<form action="/users/<%= user._id %>?_method=DELETE" method="post">
+		<button>delete</button>
+	</form>
 </section>

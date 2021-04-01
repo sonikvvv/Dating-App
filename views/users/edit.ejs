@@ -1,0 +1,111 @@
+<% layout('layouts/boilerplate') %>
+
+<section>
+    <form action="/users/<%= user._id %>?_method=PUT" method="POST">
+        <label for="user-fname">First Names</label>
+        <input type="text" name="user[firstName]" id="user-fname" value="<%= user.firstName %>">
+
+        <label for="user-mname">Middle Names</label>
+        <input type="text" name="user[middleName]" id="user-mname" value="<%= user.firstName %>">
+
+        <label for="user-lname">Last Names</label>
+        <input type="text" name="user[lastName]" id="user-lname" value="<%= user.firstName %>">
+
+        <label for="email">Email</label>
+        <input type="email" name="user[email]" id="email" value="<%= user.email %>">
+
+        <label for="password">Password</label>
+        <input type="password" name="user[password]" id="password" value="<%= user.password %>">
+
+        <label for="images">Images</label>
+        <input type="text" name="user[images]" id="images" value="<%= user.images %>">
+        
+        <label for="years">Years</label>
+        <input type="number" name="user[years]" id="years" value="<%= user.years %>">
+
+        <label for="sex">Sex</label>
+        <select name="user[sex]" id="sex" >
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Transgender">Transgender</option>
+            <option value="Two-Spirit">Two-Spirit</option>
+            <option value="Cisgender">Cisgender</option>
+            <option value="Non-Binary">Non-Binary</option>
+            <option value="Genderqueer">Genderqueer</option>
+            <option value="Gender fluid">Gender fluid</option>
+            <option value="Gender neutral">"Gender neutral</option>
+        </select>
+
+        <label for="work">Work</label>
+        <input type="text" name="user[work]" id="work" value="<%= user.work %>">
+
+        <label for="orientation">Orientation</label>
+        <select name="user[orientation]" id="orientation">
+            <option value="Lesbian">Lesbian</option>
+            <option value="Bisexual">Bisexual</option>
+            <option value="Pansexual">Pansexual</option>
+            <option value="Gay">Gay</option>
+            <option value="Asexual">Asexual</option>
+            <option value="Allosexual">Allosexual</option>
+            <option value="Heterosexual">Heterosexual</option>
+            <option value="Homosexual">Homosexual</option>
+            <option value="Monosexual">Monosexual</option>
+            <option value="Polysexual">Polysexual</option>
+            <option value="Queer">Queer</option>
+        </select>
+        
+
+        <label for="description">Description</label>
+        <textarea name="user[description]" id="description" cols="30" rows="10"><%= user.description %></textarea>
+
+        <label for="position">Prosition</label>
+        <select name="user[position]" id="position">
+            <option value="Bottom">Bottom</option>
+            <option value="Top">Top</option>
+            <option value="Versalite">Versalite</option>
+            <option value="Vers Bottom">Vers Bottom</option>
+            <option value="Vers Top">Vers Top</option>
+        </select>
+        
+
+        <label for="height">Height</label>
+        <input type="number" name="user[height]" id="height" value="<%= user.height %>">
+
+        <label for="weight">Weight</label>
+        <input type="number" name="user[weight]" id="weight" value="<%= user.weight %>">
+
+        <label for="bodyType">Body Type</label>
+        <select name="user[bodyType]" id="bodyType">
+            <option value="Average">Average</option>
+            <option value="Large">Large</option>
+            <option value="Muscular">Muscular</option>
+            <option value="Slim">Slim</option>
+            <option value="Stocky">Stocky</option>
+            <option value="Toned">Toned</option>
+        </select>
+
+        <label for="relationshipStatus">Relationship Status</label>
+        <select name="user[relationshipStatus]" id="relationshipStatus">
+            <option value="Commited">Commited</option>
+            <option value="Dating">Dating</option>
+            <option value="Engaged">Engaged</option>
+            <option value="Exclusive">Exclusive</option>
+            <option value="Married">Married</option>
+            <option value="Open Relationship">Open Relationship</option>
+            <option value="Partnered">Partnered</option>
+            <option value="Single">Single</option>
+        </select>
+
+        <label for="nsfw">NSFW</label>
+        <select name="user[nsfw]" id="nsfw">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="social">Social Links</label>
+        <input type="text" name="user[socialLincks]" id="social">
+
+        <button>Save</button>
+    </form>
+    <a href="/users">ALL</a>
+</section>
