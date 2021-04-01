@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-    first_name: String,
-    middle_name: String,
-    last_name: String,
+    firstName: String,
+    middleName: String,
+    lastName: String,
     email: String,
     access: {
         type: String,
@@ -21,7 +21,17 @@ const UserSchema = new Schema({
     years: Number,
     sex: {
         type: String,
-        enum: ["male", "female"],
+        enum: [
+            "Male",
+            "Female",
+            "Transgender",
+            "Two-Spirit",
+            "Cisgender",
+            "Non-Binary",
+            "Genderqueer",
+            "Gender fluid",
+            "Gender neutral",
+        ],
     },
     work: String,
 
@@ -45,17 +55,26 @@ const UserSchema = new Schema({
     description: String,
     position: {
         type: String,
-        enum: ["bottom", "top", "versalite", "vers bttm", "vers top"],
+        enum: ["Bottom", "Top", "Versalite", "Vers Bottom", "Vers Top"],
     },
     height: Number,
     weight: Number,
     bodyType: {
         type: String,
-        enum: [],
+        enum: ["Average", "Large", "Muscular", "Slim", "Stocky", "Toned"],
     },
     relationshipStatus: {
         type: String,
-        enum: [],
+        enum: [
+            "Commited",
+            "Dating",
+            "Engaged",
+            "Exclusive",
+            "Married",
+            "Open Relationship",
+            "Partnered",
+            "Single",
+        ],
     },
     nsfw: {
         type: String,
@@ -66,6 +85,11 @@ const UserSchema = new Schema({
             type: String,
         },
     ],
+    level: {
+        type: String,
+        enum: ["Peasant", "Aristocrat", "King / Queen", "God Mode"],
+        default: "Peasant",
+    },
 });
 
 module.exports = mongoose.model("User", UserSchema);
