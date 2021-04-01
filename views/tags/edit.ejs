@@ -1,0 +1,10 @@
+<% layout('layouts/boilerplate') %>
+
+    <section>
+        <form action="/tags/<%= tag._id %>?_method=PUT" method="post">
+            <label for="tag-name">Title</label>
+            <input type="text" name="tag[title]" id="tag-name" value="<%= tag.title %>">
+            <button>Save</button>
+        </form>
+        <a href="/tags">ALL</a>
+    </section>

@@ -1,0 +1,10 @@
+<% layout('layouts/boilerplate') %>
+
+<section>
+    <h2><%= tag.title %></h2>
+    <a href="/tags">ALL</a>
+    <a href="/tags/<%= tag._id %>/edit">edit</a>
+    <form action="/tags/<%= tag._id %>?_method=DELETE" method="post">
+        <button>Delete</button>    
+    </form>
+</section>

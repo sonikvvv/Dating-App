@@ -1,0 +1,14 @@
+<% layout('layouts/boilerplate') %>
+
+    <section class="container">
+        <a href="/tags/new">ADD</a>
+        <ul>
+            <% for ( let tag of tags) { %>
+                <li>
+                    <a href="/tags/<%= tag._id %>">
+                        <%= tag.title %>
+                    </a>
+                </li>
+                <% } %>
+        </ul>
+    </section>
