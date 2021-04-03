@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate') %>
 
-<div>
+<section class="container">
     <h2><%= rule.title %></h2>
     <p><%= rule.description %></p>
     <a href="/rules">all</a>
@@ -8,4 +8,4 @@
     <form action="/rules/<%= rule._id %>?_method=DELETE" method="POST">
         <button>Delete</button>
     </form>
-</div>
+</section>

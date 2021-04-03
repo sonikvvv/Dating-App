@@ -1,6 +1,7 @@
 <% layout('layouts/boilerplate') %>
 
-    <section>
+    <section class="container">
+        <h2>Edit Tag</h2>
         <form action="/tags/<%= tag._id %>?_method=PUT" method="post">
             <label for="tag-name">Title</label>
             <input type="text" name="tag[title]" id="tag-name" value="<%= tag.title %>">

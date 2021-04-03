@@ -1,10 +1,16 @@
 <% layout('layouts/boilerplate') %>
 
-<form action="/badges" method="post">
-    <div>
-        <label for="title">Title: </label>
-        <input type="text" id="title" name="badge[title]">
-    </div>
-    <button>Save</button>
-</form>
-<a href="/badges">All</a>
+<section class="container">
+    <h2>New Badge</h2>
+    <form action="/badges" method="post">
+        <div>
+            <label for="title">Title: </label>
+            <input type="text" id="title" name="badge[title]">
+
+            <label for="description">Description</label>
+            <textarea name="dabge[description]" id="description" cols="10" rows="2"></textarea>
+        </div>
+        <button>Save</button>
+    </form>
+    <a href="/badges">All</a>
+</section>

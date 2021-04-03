@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate') %>
 
-    <section>
+    <section class="container">
         <ul>
             <% for( let user of users ) { %>
                 <li><a href="/users/<%= user._id %>"><%= user.firstName %></a></li>

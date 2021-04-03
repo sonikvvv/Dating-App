@@ -1,17 +1,17 @@
 <% layout('layouts/boilerplate') %>
 
-<section class="container">
-  <h2>New Rules</h2>
-  <form action="/rules" method="POST">
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon1">@</span>
-      <input type="text" class="form-control" placeholder="Rule Name" name="rule[title]"/>
-    </div>
-    <div class="input-group">
-      <span class="input-group-text">Rule Description</span>
-      <textarea class="form-control" name="rule[description]"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Save</button>
-  </form>
-  <a href="/rules">ALL</a>
-</section>
+	<section class="container">
+		<h2>New Rule</h2>
+		<form action="/rules" method="POST">
+			<div class="input-group mb-3">
+				<span class="input-group-text" id="basic-addon1">@</span>
+				<input type="text" class="form-control" placeholder="Rule Name" name="rule[title]" />
+			</div>
+			<div class="input-group">
+				<span class="input-group-text">Rule Description</span>
+				<textarea class="form-control" name="rule[description]"></textarea>
+			</div>
+			<button type="submit" class="btn btn-primary">Save</button>
+		</form>
+		<a href="/rules">ALL</a>
+	</section>
