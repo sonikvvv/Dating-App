@@ -1,21 +1,21 @@
 <% layout('layouts/boilerplate') %>
 
-<section class="container">
-  <section class="chatBubbles">
-    <div>
-      <img src="" alt="" />
-      <h2></h2>
-    </div>
-  </section>
-  <section class="messages">
-    <div></div>
-    <div></div>
-  </section>
-  <form action="">
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" />
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</section>
+	<section class="container d-flex flex-row">
+		<section class="container chatBubbles">
+			<input type="text" name="search" id="search">
+			<% for( let user of users ) { %>
+				<div>
+					<img src="" alt="">
+					<h4><%= user.firstName %> <%= user.middleName %> <%= user.latsName %></h4>
+				</div>
+				<% } %>
+		</section>
+		<section class="container messages">
+			<form action="/chats" method="POST">
+				<div>
+					<input type="text" class="form-control" id="" />
+				</div>
+				<button class="btn btn-primary">Send</button>
+			</form>
+		</section>
+	</section>
