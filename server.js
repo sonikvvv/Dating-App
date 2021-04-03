@@ -175,7 +175,7 @@ app.get('/users/:id', async (req, res) => {
     res.render('users/userPage', {user});
 });
 
-app.get("/user/:id/edit", async (req, res) => {
+app.get("/users/:id/edit", async (req, res) => {
     const user = await User.findById(req.params.id);
     res.render("users/edit", { user });
 });
@@ -190,6 +190,21 @@ app.delete("/users/:id", async (req, res) => {
     const { id } = req.params;
     const user = await User.findByIdAndDelete(id);
     res.redirect('/users');
+});
+
+////
+
+app.get('/discover', (req, res) => {
+    res.render('discover/discoverPage');
+});
+
+app.post('/discover', (req, res) => {
+    res.send(req.body.user);
+});
+
+app.get('/chats', async (req, res) => {
+    const users = await User.find({});
+    res.render('chats/chatsPage', { users });
 });
 
 ////
