@@ -1,91 +1,160 @@
 <% layout('layouts/boilerplate') %>
 
-    <section class="container d-flex flex-row">
-        <section class="container">
-            <h2>Filter</h2>
-            <form action="/discover" method="post">
-                <section class="d-flex flex-column">
-                    <label for="sex">Sex</label>
-                    <select name="user[sex]" id="sex">
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Transgender">Transgender</option>
-                        <option value="Two-Spirit">Two-Spirit</option>
-                        <option value="Cisgender">Cisgender</option>
-                        <option value="Non-Binary">Non-Binary</option>
-                        <option value="Genderqueer">Genderqueer</option>
-                        <option value="Gender fluid">Gender fluid</option>
-                        <option value="Gender neutral">"Gender neutral</option>
-                    </select>
-                    
-                    <label for="orientation">Orientation</label>
-                    <select name="user[orientation]" id="orientation">
-                        <option value="Lesbian">Lesbian</option>
-                        <option value="Bisexual">Bisexual</option>
-                        <option value="Pansexual">Pansexual</option>
-                        <option value="Gay">Gay</option>
-                        <option value="Asexual">Asexual</option>
-                        <option value="Allosexual">Allosexual</option>
-                        <option value="Heterosexual">Heterosexual</option>
-                        <option value="Homosexual">Homosexual</option>
-                        <option value="Monosexual">Monosexual</option>
-                        <option value="Polysexual">Polysexual</option>
-                        <option value="Queer">Queer</option>
-                    </select>
-                    
-                    <section>
-                        <label>Years</label>
-                        <label for="years" class="form-label">From</label>
-                        <input type="range" class="form-range" min="18" max="90" id="years" name="user[years-from]">
-                        <label for="years" class="form-label">To</label>
-                        <input type="range" class="form-range" min="18" max="90" id="years" name="user[years-to]">
-                    </section>
-                    
-                    <label for="relationshipStatus">Relationship Status</label>
-                    <select name="user[relationshipStatus]" id="relationshipStatus">
-                        <option value="Commited">Commited</option>
-                        <option value="Dating">Dating</option>
-                        <option value="Engaged">Engaged</option>
-                        <option value="Exclusive">Exclusive</option>
-                        <option value="Married">Married</option>
-                        <option value="Open Relationship">Open Relationship</option>
-                        <option value="Partnered">Partnered</option>
-                        <option value="Single">Single</option>
-                    </select>
+<section class="container d-flex flex-row">
+    <section class="container">
+        <h2>Filter</h2>
+        <form action="/discover" method="post">
+            <section class="d-flex flex-column">
+                <label for="sex">Sex</label>
+                <select name="user[sex]" id="sex">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Transgender">Transgender</option>
+                    <option value="Two-Spirit">Two-Spirit</option>
+                    <option value="Cisgender">Cisgender</option>
+                    <option value="Non-Binary">Non-Binary</option>
+                    <option value="Genderqueer">Genderqueer</option>
+                    <option value="Gender fluid">Gender fluid</option>
+                    <option value="Gender neutral">"Gender neutral</option>
+                </select>
 
-                    <section>
-                        <label>Height</label>
-                        <label for="height-from" class="form-label">From</label>
-                        <input type="range" class="form-range" min="130" max="250" id="height-from" name="user[height-from]">
-                        
-                        <label for="height-to" class="form-label">To</label>
-                        <input type="range" class="form-range" min="130" max="250" id="height-to" name="user[height-to]">
-                    </section>
+                <label for="orientation">Orientation</label>
+                <select name="user[orientation]" id="orientation">
+                    <option value="Lesbian">Lesbian</option>
+                    <option value="Bisexual">Bisexual</option>
+                    <option value="Pansexual">Pansexual</option>
+                    <option value="Gay">Gay</option>
+                    <option value="Asexual">Asexual</option>
+                    <option value="Allosexual">Allosexual</option>
+                    <option value="Heterosexual">Heterosexual</option>
+                    <option value="Homosexual">Homosexual</option>
+                    <option value="Monosexual">Monosexual</option>
+                    <option value="Polysexual">Polysexual</option>
+                    <option value="Queer">Queer</option>
+                </select>
 
-                    <section>
-                        <label>Weight</label>
-                        <label for="weight-from" class="form-label">From</label>
-                        <input type="range" class="form-range" min="130" max="150" id="weight-from" name="user[weight-from]">
-                        
-                        <label for="weight-to" class="form-label">To</label>
-                        <input type="range" class="form-range" min="130" max="150" id="weight-to" name="user[weight-to]">
-                    </section>
-                    
-                    <label for="bodyType">Body Type</label>
-                    <select name="user[bodyType]" id="bodyType">
-                        <option value="Average">Average</option>
-                        <option value="Large">Large</option>
-                        <option value="Muscular">Muscular</option>
-                        <option value="Slim">Slim</option>
-                        <option value="Stocky">Stocky</option>
-                        <option value="Toned">Toned</option>
-                    </select>
+                <section>
+                    <label>Years</label>
+                    <label for="years" class="form-label">From</label>
+                    <input
+                        type="range"
+                        class="form-range"
+                        min="18"
+                        max="90"
+                        id="years"
+                        name="user[years-from]"
+                    />
+                    <label for="years" class="form-label">To</label>
+                    <input
+                        type="range"
+                        class="form-range"
+                        min="18"
+                        max="90"
+                        id="years"
+                        name="user[years-to]"
+                    />
                 </section>
 
-                <button>Search</button>
-            </form>
-        </section>
-        <section class="container">
-            
-        </section>
+                <label for="relationshipStatus">Relationship Status</label>
+                <select name="user[relationshipStatus]" id="relationshipStatus">
+                    <option value="Commited">Commited</option>
+                    <option value="Dating">Dating</option>
+                    <option value="Engaged">Engaged</option>
+                    <option value="Exclusive">Exclusive</option>
+                    <option value="Married">Married</option>
+                    <option value="Open Relationship">Open Relationship</option>
+                    <option value="Partnered">Partnered</option>
+                    <option value="Single">Single</option>
+                </select>
+
+                <section>
+                    <label>Height</label>
+                    <label for="height-from" class="form-label">From</label>
+                    <input
+                        type="range"
+                        class="form-range"
+                        min="130"
+                        max="250"
+                        id="height-from"
+                        name="user[height-from]"
+                    />
+
+                    <label for="height-to" class="form-label">To</label>
+                    <input
+                        type="range"
+                        class="form-range"
+                        min="130"
+                        max="250"
+                        id="height-to"
+                        name="user[height-to]"
+                    />
+                </section>
+
+                <section>
+                    <label>Weight</label>
+                    <label for="weight-from" class="form-label">From</label>
+                    <input
+                        type="range"
+                        class="form-range"
+                        min="130"
+                        max="150"
+                        id="weight-from"
+                        name="user[weight-from]"
+                    />
+
+                    <label for="weight-to" class="form-label">To</label>
+                    <input
+                        type="range"
+                        class="form-range"
+                        min="130"
+                        max="150"
+                        id="weight-to"
+                        name="user[weight-to]"
+                    />
+                </section>
+
+                <label for="bodyType">Body Type</label>
+                <select name="user[bodyType]" id="bodyType">
+                    <option value="Average">Average</option>
+                    <option value="Large">Large</option>
+                    <option value="Muscular">Muscular</option>
+                    <option value="Slim">Slim</option>
+                    <option value="Stocky">Stocky</option>
+                    <option value="Toned">Toned</option>
+                </select>
+            </section>
+
+            <button>Search</button>
+        </form>
     </section>
+    <section class="container d-flex flex-column">
+        <div class="card bg-dark text-white">
+            <img
+                src="/images/yuriy-mlcn-3MORfl6x1Yg-unsplash.jpg"
+                class="card-img"
+                alt="..."
+            />
+            <div class="card-img-overlay">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                    This is a wider card with supporting text below as a natural
+                    lead-in to additional content. This content is a little bit
+                    longer.
+                </p>
+                <p class="card-text">Last updated 3 mins ago</p>
+            </div>
+        </div>
+        <class class="container">
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-primary">Like</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-danger">
+                        Dislike
+                    </button>
+                </div>
+            </div>
+        </class>
+    </section>
+</section>
