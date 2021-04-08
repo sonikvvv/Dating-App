@@ -1,11 +1,13 @@
 <% layout('layouts/boilerplate') %>
 
-<section class="container">
-    <h2>New Tag</h2>
-    <form action="/tags" method="post">
-        <label for="tag-name">Title</label>
-        <input type="text" name="tag[title]" id="tag-name" >
-        <button>Save</button>
-    </form>
-    <a href="/tags">ALL</a>
-</section>
+    <section class="container">
+        <h2>New Tag</h2>
+        <form action="/tags" method="post" class="needs-validation" novalidate>
+            <div class="form-floating mb-3">
+                <input type="text" name="tag[title]" class="form-control" id="tag-name" placeholder="title" required>
+                <label for="tag-name">Title</label>
+            </div>
+            <button class="btn btn-success">Save</button>
+        </form>
+        <a href="/tags">ALL</a>
+    </section>
