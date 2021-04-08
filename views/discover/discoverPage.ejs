@@ -5,34 +5,38 @@
             <h2>Filter</h2>
             <form action="/discover" method="post">
                 <section class="d-flex flex-column">
-                    <label for="sex">Sex</label>
-                    <select name="user[sex]" id="sex">
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Transgender">Transgender</option>
-                        <option value="Two-Spirit">Two-Spirit</option>
-                        <option value="Cisgender">Cisgender</option>
-                        <option value="Non-Binary">Non-Binary</option>
-                        <option value="Genderqueer">Genderqueer</option>
-                        <option value="Gender fluid">Gender fluid</option>
-                        <option value="Gender neutral">"Gender neutral</option>
-                    </select>
-                    
-                    <label for="orientation">Orientation</label>
-                    <select name="user[orientation]" id="orientation">
-                        <option value="Lesbian">Lesbian</option>
-                        <option value="Bisexual">Bisexual</option>
-                        <option value="Pansexual">Pansexual</option>
-                        <option value="Gay">Gay</option>
-                        <option value="Asexual">Asexual</option>
-                        <option value="Allosexual">Allosexual</option>
-                        <option value="Heterosexual">Heterosexual</option>
-                        <option value="Homosexual">Homosexual</option>
-                        <option value="Monosexual">Monosexual</option>
-                        <option value="Polysexual">Polysexual</option>
-                        <option value="Queer">Queer</option>
-                    </select>
-                    
+                    <div class="form-floating">
+                        <select name="user[sex]" id="sex" class="form-select mb-3">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Transgender">Transgender</option>
+                            <option value="Two-Spirit">Two-Spirit</option>
+                            <option value="Cisgender">Cisgender</option>
+                            <option value="Non-Binary">Non-Binary</option>
+                            <option value="Genderqueer">Genderqueer</option>
+                            <option value="Gender fluid">Gender fluid</option>
+                            <option value="Gender neutral">"Gender neutral</option>
+                        </select>
+                        <label for="sex">Sex</label>
+                    </div>
+
+                    <div class="form-floating">
+                        <select name="user[orientation]" id="orientation" class="form-select mb-3">
+                            <option value="Lesbian">Lesbian</option>
+                            <option value="Bisexual">Bisexual</option>
+                            <option value="Pansexual">Pansexual</option>
+                            <option value="Gay">Gay</option>
+                            <option value="Asexual">Asexual</option>
+                            <option value="Allosexual">Allosexual</option>
+                            <option value="Heterosexual">Heterosexual</option>
+                            <option value="Homosexual">Homosexual</option>
+                            <option value="Monosexual">Monosexual</option>
+                            <option value="Polysexual">Polysexual</option>
+                            <option value="Queer">Queer</option>
+                        </select>
+                        <label for="orientation">Orientation</label>
+                    </div>
+
                     <section>
                         <label>Years</label>
                         <label for="years" class="form-label">From</label>
@@ -40,52 +44,61 @@
                         <label for="years" class="form-label">To</label>
                         <input type="range" class="form-range" min="18" max="90" id="years" name="user[years-to]">
                     </section>
-                    
-                    <label for="relationshipStatus">Relationship Status</label>
-                    <select name="user[relationshipStatus]" id="relationshipStatus">
-                        <option value="Commited">Commited</option>
-                        <option value="Dating">Dating</option>
-                        <option value="Engaged">Engaged</option>
-                        <option value="Exclusive">Exclusive</option>
-                        <option value="Married">Married</option>
-                        <option value="Open Relationship">Open Relationship</option>
-                        <option value="Partnered">Partnered</option>
-                        <option value="Single">Single</option>
-                    </select>
+
+                    <div class="form-floating">
+                        <select name="user[relationshipStatus]" id="relationshipStatus" class="form-select mb-3">
+                            <option value="Commited">Commited</option>
+                            <option value="Dating">Dating</option>
+                            <option value="Engaged">Engaged</option>
+                            <option value="Exclusive">Exclusive</option>
+                            <option value="Married">Married</option>
+                            <option value="Open Relationship">Open Relationship</option>
+                            <option value="Partnered">Partnered</option>
+                            <option value="Single">Single</option>
+                        </select>
+                        <label for="relationshipStatus">Relationship Status</label>
+                    </div>
+
 
                     <section>
                         <label>Height</label>
                         <label for="height-from" class="form-label">From</label>
-                        <input type="range" class="form-range" min="130" max="250" id="height-from" name="user[height-from]">
-                        
+                        <input type="range" class="form-range" min="130" max="250" id="height-from"
+                            name="user[height-from]">
+
                         <label for="height-to" class="form-label">To</label>
-                        <input type="range" class="form-range" min="130" max="250" id="height-to" name="user[height-to]">
+                        <input type="range" class="form-range" min="130" max="250" id="height-to"
+                            name="user[height-to]">
                     </section>
 
                     <section>
                         <label>Weight</label>
                         <label for="weight-from" class="form-label">From</label>
-                        <input type="range" class="form-range" min="130" max="150" id="weight-from" name="user[weight-from]">
-                        
+                        <input type="range" class="form-range" min="130" max="150" id="weight-from"
+                            name="user[weight-from]">
+
                         <label for="weight-to" class="form-label">To</label>
-                        <input type="range" class="form-range" min="130" max="150" id="weight-to" name="user[weight-to]">
+                        <input type="range" class="form-range" min="130" max="150" id="weight-to"
+                            name="user[weight-to]">
                     </section>
-                    
-                    <label for="bodyType">Body Type</label>
-                    <select name="user[bodyType]" id="bodyType">
-                        <option value="Average">Average</option>
-                        <option value="Large">Large</option>
-                        <option value="Muscular">Muscular</option>
-                        <option value="Slim">Slim</option>
-                        <option value="Stocky">Stocky</option>
-                        <option value="Toned">Toned</option>
-                    </select>
+
+                    <div class="form-floating">
+                        <select name="user[bodyType]" id="bodyType" class="form-select mb-3">
+                            <option value="Average">Average</option>
+                            <option value="Large">Large</option>
+                            <option value="Muscular">Muscular</option>
+                            <option value="Slim">Slim</option>
+                            <option value="Stocky">Stocky</option>
+                            <option value="Toned">Toned</option>
+                        </select>
+                        <label for="bodyType">Body Type</label>
+                    </div>
                 </section>
 
-                <button>Search</button>
+                <button class="btn btn-primary">Search</button>
             </form>
         </section>
         <section class="container">
-            
+
         </section>
     </section>
