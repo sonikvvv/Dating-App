@@ -2,9 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-    firstName: String,
-    middleName: String,
-    lastName: String,
+    userName: String,
     email: String,
     access: {
         type: String,
@@ -34,7 +32,6 @@ const UserSchema = new Schema({
         ],
     },
     work: String,
-
     orientation: {
         type: String,
         enum: [
@@ -80,11 +77,6 @@ const UserSchema = new Schema({
         type: String,
         enum: ["Yes", "No"],
     },
-    socialLincks: [
-        {
-            type: String,
-        },
-    ],
     level: {
         type: String,
         enum: ["Peasant", "Aristocrat", "King / Queen", "God Mode"],
