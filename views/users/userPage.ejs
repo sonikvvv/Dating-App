@@ -2,7 +2,7 @@
 
 <section class="container">
     <img src="" alt="" />
-    <h2><%= user.firstName %> Level:<%= user.level %></h2>
+    <h2><%= user.userName %> Level:<%= user.level %></h2>
     <p><%= user.description %></p>
     <section>
         <% for( let tag of user.tags ) { %>
@@ -28,6 +28,6 @@
     <a href="/users/<%= user._id %>/edit">Edit</a>
     <a href="/users">all</a>
     <form action="/users/<%= user._id %>?_method=DELETE" method="post">
-        <button>delete</button>
+        <button class="btn btn-danger">delete</button>
     </form>
 </section>

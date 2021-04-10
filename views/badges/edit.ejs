@@ -2,15 +2,20 @@
 
     <section class="container">
         <h2>Edit Badge</h2>
-        <form action="/badges/<%= badge._id %>?_method=PUT" method="post">
+        <form action="/badges/<%= badge._id %>?_method=PUT" method="post" class=" form-floating needs-validation">
             <div>
-                <label for="title">Title: </label>
-                <input type="text" id="title" name="badge[title]" value="<%= badge.title %>">
+                <div class="form-floating mb-3">
+                    <input type="text" id="title" name="badge[title]" value="<%= badge.title %>" placeholder="Title" class="form-control" required>
+                    <label for="title">Title: </label>
+                </div>
 
-                <label for="description">Description</label>
-                <textarea name="dabge[description]" id="description" cols="10" rows="2"><%= badge.description %></textarea>
+                <div class="form-floating mb-3">
+                    <textarea name="badge[description]" id="description" cols="10"
+                        rows="2" placeholder="Description" class="form-control" required><%= badge.description %></textarea>
+                    <label for="description">Description</label>
+                </div>
             </div>
-            <button>Save</button>
+            <button class="btn btn-success">Save</button>
         </form>
         <a href="/badges">All</a>
     </section>

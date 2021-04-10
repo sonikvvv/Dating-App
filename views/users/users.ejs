@@ -3,7 +3,7 @@
     <section class="container">
         <ul>
             <% for( let user of users ) { %>
-                <li><a href="/users/<%= user._id %>"><%= user.firstName %></a></li>
+                <li><a href="/users/<%= user._id %>"><%= user.userName %></a></li>
                 <% } %>
         </ul>
     </section>

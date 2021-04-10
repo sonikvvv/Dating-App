@@ -2,17 +2,16 @@
 
     <section class="container">
         <h2 class="d-flex justify-content-center">Welcome</h2>
-        <form class="d-flex flex-column">
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+        <form class="d-flex flex-column needs-validation" novalidate>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="email" placeholder="email" name="user[email]" required>
+                <label for="email" class="form-label">Email address</label>
             </div>
-            <div class="mb-3">
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password" name="user[password]" required>
                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
             </div>
             <button type="submit" class="btn btn-primary justify-content-center">Submit</button>
         </form>
-        <p class="d-flex justify-content-center">You don't have an account? <a href="/register">register</a></p>
+        <p class="d-flex justify-content-center">You don't have an account?<a href="/register">register</a></p>
     </section>

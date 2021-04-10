@@ -2,16 +2,16 @@
 
 	<section class="container">
 		<h2>New Rule</h2>
-		<form action="/rules" method="POST">
-			<div class="input-group mb-3">
-				<span class="input-group-text" id="basic-addon1">@</span>
-				<input type="text" class="form-control" placeholder="Rule Name" name="rule[title]" />
+		<form action="/rules" method="POST" class="needs-validation" novalidate>
+			<div class="form-floating mb-3">
+				<input type="text" class="form-control" placeholder="Rule Name" name="rule[title]" required/>
+				<label for="title">Title</label>
 			</div>
-			<div class="input-group">
-				<span class="input-group-text">Rule Description</span>
-				<textarea class="form-control" name="rule[description]"></textarea>
+			<div class="form-floating mb-3">
+				<textarea class="form-control" name="rule[description]" required></textarea>
+				<label for="description">Description</label>
 			</div>
-			<button type="submit" class="btn btn-primary">Save</button>
+			<button class="btn btn-success">Save</button>
 		</form>
 		<a href="/rules">ALL</a>
 	</section>

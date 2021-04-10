@@ -1,33 +1,32 @@
 <% layout('layouts/boilerplate') %>
 
     <section class="container">
-        <form action="/register" method="POST">
-            <h2 class="d-flex justify-content-center">Register</h2>
-            <form>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">@</span>
-                    <input type="text" class="form-control" placeholder="Names" name="user[firstName]">
-                </div>
+        <form action="/register" method="POST" class="d-flex flex-column needs-validation" novalidate>
+            <h2>Register</h2>
 
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" name="user[email]">
-                    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
-                </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="userName" placeholder="Names" name="user[userName]"
+                    required>
+                <label for="userName">Username</label>
+            </div>
 
-                <div class="mb-3">
-                    <label for="date-pick" class="form-label">Birth date</label>
-                    <input type="number" class="form-control" id="date-pick" name="user[years]">
-                    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
-                </div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="email" name="user[email]" placeholder="email" required>
+                <label for="email">Email address</label>
+            </div>
 
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" name="user[password]">
-                </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="years" name="user[years]" placeholder="years" required>
+                <label for="years">Years</label>
+            </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password" name="user[password]" placeholder="password"
+                    required>
+                <label for="password">Password</label>
+            </div>
+
+            <button class="btn btn-primary">Submit</button>
         </form>
-        <p class="d-flex justify-content-center">You have an account? <a href="/login">login</a></p>
+        <p class="d-flex justify-content-center">You have an account?<a href="/login">login</a></p>
     </section>
