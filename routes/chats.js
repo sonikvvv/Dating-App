@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
+const ExpressError = require('../utils/ExpressError');
 const router = express.Router();
 
 router.get('/', catchAsync( async (req, res) => {

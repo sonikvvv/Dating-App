@@ -1,7 +1,19 @@
 const express = require("express");
 const Tag = require("../models/tagModel");
 const catchAsync = require('../utils/catchAsync');
+const ExpressError = require('../utils/ExpressError');
+const { tagSchema } = require('../utils/validationSchemas');
 const router = express.Router();
+
+const validateTag = (req, res, next) => {
+    const { error } = tagSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map((el) => el.message).join(', ');
+        throw new ExpressError(msg, 400);
+    } else {
+        next();
+    }
+};
 
 router.get("/", catchAsync( async (req, res) => {
     const tags = await Tag.find({});
@@ -12,7 +24,7 @@ router.get("/new", (req, res) => {
     res.render("tags/new");
 });
 
-router.post("/", catchAsync( async (req, res) => {
+router.post("/", validateTag, catchAsync( async (req, res) => {
     const tag = new Tag({ ...req.body.tag });
     await tag.save();
     res.redirect(`/tags/${tag._id}`);
@@ -28,7 +40,7 @@ router.get("/:id/edit", catchAsync( async (req, res) => {
     res.render("tags/edit", { tag });
 }));
 
-router.put("/:id", catchAsync( async (req, res) => {
+router.put("/:id", validateTag, catchAsync( async (req, res) => {
     const { id } = req.params;
     const tag = await Tag.findByIdAndUpdate(id, { ...req.body.tag });
     res.redirect(`/tags/${tag._id}`);
