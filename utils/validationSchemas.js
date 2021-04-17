@@ -1,4 +1,4 @@
-const Joi = require('joi');
+const Joi = require("joi");
 
 module.exports.badgeSchema = Joi.object({
     badge: Joi.object({
@@ -9,7 +9,7 @@ module.exports.badgeSchema = Joi.object({
 
 module.exports.registerSchema = Joi.object({
     user: Joi.object({
-        userName: Joi.string().required(),
+        username: Joi.string().required(),
         email: Joi.string().email().required(),
         years: Joi.number().required(),
         password: Joi.string().required(),
@@ -31,20 +31,20 @@ module.exports.tagSchema = Joi.object({
 
 module.exports.userSchema = Joi.object({
     user: Joi.object({
-        userName: Joi.string().required(),
+        username: Joi.string().required(),
         email: Joi.string().email().required(),
         years: Joi.number().greater(18).required(),
         password: Joi.string().required(),
-        images: Joi.string().allow(''),
-        sex: Joi.string().allow(''),
-        work: Joi.string().allow(''),
-        orientation: Joi.string().allow(''),
-        description: Joi.string().allow(''),
-        position: Joi.string().allow(''),
-        height: Joi.string().allow(''),
-        weight: Joi.string().allow(''),
-        bodyType: Joi.string().allow(''),
-        relationshipStatus: Joi.string().allow(''),
-        nsfw: Joi.string().allow(''),
+        images: Joi.string().allow(""),
+        sex: Joi.string().allow(""),
+        work: Joi.string().allow(""),
+        orientation: Joi.string().allow(""),
+        description: Joi.string().allow(""),
+        position: Joi.string().allow(""),
+        height: Joi.string().allow(""),
+        weight: Joi.string().allow(""),
+        bodyType: Joi.string().allow(""),
+        relationshipStatus: Joi.string().allow(""),
+        nsfw: Joi.string().allow(""),
     }).required(),
 });

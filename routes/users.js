@@ -1,8 +1,10 @@
 const express = require("express");
+const { isError } = require("joi");
+const passport = require('passport');
 const User = require("../models/userModel");
 const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError');
-const { userSchema } = require('../utils/validationSchemas');
+const { userSchema, registerSchema } = require("../utils/validationSchemas");
 const router = express.Router();
 
 const validateUser = (req, res, next) => {
@@ -15,10 +17,43 @@ const validateUser = (req, res, next) => {
     }
 };
 
+const validateRegister = (req, res, next) => {
+    const { error } = registerSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map((el) => el.message).join(", ");
+        throw new ExpressError(msg, 400);
+    } else {
+        next();
+    }
+};
+
 router.get("/", catchAsync( async (req, res) => {
     const users = await User.find({});
     res.render("users/users", { users });
 }));
+
+router.get("/login", (req, res) => {
+    res.render("log-reg/login");
+});
+
+router.post("/login", passport.authenticate('local', {failureRedirect: '/login'}), (req, res) => {
+    res.send(req.body.user);
+});
+
+router.get("/register", (req, res) => {
+    res.render("log-reg/register");
+});
+
+router.post(
+    "/register",
+    validateRegister,
+    catchAsync(async (req, res) => { // TODO: wrap with try catch
+        const { email, username, password } = req.body.user;
+        const user = new User({email, username});
+        const registeredUser = await User.register(user, password);
+        res.redirect(`/users/${user._id}`);
+    })
+);
 
 router.get("/:id", catchAsync( async (req, res) => {
     const { id } = req.params;
