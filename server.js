@@ -8,6 +8,10 @@ const server = require('http').createServer(app);
 const ExpressError = require('./utils/ExpressError');
 const io = require('socket.io')(server);
 const session = require('express-session');
+const flash = require('connect-flash');
+const passport = require('passport');
+const LocalStrategy = require("passport-local");
+const User = require('./models/userModel');
 
 
 //* routs
@@ -17,8 +21,6 @@ const tags = require('./routes/tags');
 const users = require('./routes/users');
 const chats = require('./routes/chats');
 const discover = require('./routes/discover');
-const register = require('./routes/register');
-const login = require('./routes/login');
 
 
 //* db connection
@@ -58,9 +60,27 @@ const sessionConfig = {
 };
 app.use(session(sessionConfig));
 
+//* Flash(for fancy popup messages) ;)
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+})
+
+//* Authentication :)
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 //* routs
 app.get('/', (req, res) => {
+    req.flash('success', 'test')
     res.render('home');
 });
 
@@ -72,8 +92,6 @@ app.use('/tags', tags);
 app.use('/users', users);
 app.use('/chats', chats);
 app.use('/discover', discover);
-app.use('/register', register);
-app.use('/login', login);
 
 ////
 
