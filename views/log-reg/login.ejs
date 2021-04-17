@@ -2,10 +2,10 @@
 
     <section class="container">
         <h2 class="d-flex justify-content-center">Welcome</h2>
-        <form class="d-flex flex-column needs-validation" novalidate>
+        <form action="/users/login" method="POST" class="d-flex flex-column needs-validation" novalidate>
             <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="email" placeholder="email" name="user[email]" required>
-                <label for="email" class="form-label">Email address</label>
+                <input type="text" class="form-control" id="username" placeholder="username" name="user[username]" required>
+                <label for="username" class="form-label">Username</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password" name="user[password]" required>
@@ -13,5 +13,5 @@
             </div>
             <button type="submit" class="btn btn-primary justify-content-center">Submit</button>
         </form>
-        <p class="d-flex justify-content-center">You don't have an account?<a href="/register">register</a></p>
+        <p class="d-flex justify-content-center">You don't have an account?<a href="/users/register">register</a></p>
     </section>
