@@ -1,5 +1,5 @@
 const express = require("express");
-const Rule = require("../models/ruleModel");
+const Rule = require('../utils/models/ruleModel');
 const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError');
 const { ruleSchema } = require('../utils/validationSchemas');

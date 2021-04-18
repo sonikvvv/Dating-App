@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Tag = require("../models/tagModel");
+const Tag = require("../../models/tagModel");
 const tagSeeds = require('./tagSeeds');
 
 mongoose.connect("mongodb://localhost:27017/dating-app", {

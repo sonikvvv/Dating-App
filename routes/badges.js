@@ -1,5 +1,5 @@
 const express = require("express");
-const Badge = require("../models/badgeModel");
+const Badge = require("../utils/models/badgeModel");
 const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError');
 const { badgeSchema } = require('../utils/validationSchemas');

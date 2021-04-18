@@ -11,7 +11,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
-const User = require('./models/userModel');
+const User = require('./utils/models/userModel');
 
 
 //* routs

@@ -1,5 +1,5 @@
 const express = require("express");
-const Tag = require("../models/tagModel");
+const Tag = require('../utils/models/tagModel');
 const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError');
 const { tagSchema } = require('../utils/validationSchemas');

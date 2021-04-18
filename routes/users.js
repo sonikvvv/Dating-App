@@ -1,6 +1,6 @@
 const express = require("express");
 const { isError } = require("joi"); //? do we use it
-const User = require("../models/userModel");
+const User = require('../utils/models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError');
 const { userSchema, registerSchema } = require("../utils/validationSchemas");
