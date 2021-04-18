@@ -1,11 +1,11 @@
 const express = require("express");
-const { isError } = require("joi");
-const passport = require('passport');
+const { isError } = require("joi"); //? do we use it
 const User = require("../models/userModel");
 const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError');
 const { userSchema, registerSchema } = require("../utils/validationSchemas");
 const router = express.Router();
+const passport = require('passport');
 
 const validateUser = (req, res, next) => {
     const { error } = userSchema.validate(req.body);
@@ -36,7 +36,7 @@ router.get("/login", (req, res) => {
     res.render("log-reg/login");
 });
 
-router.post("/login", passport.authenticate('local', {failureRedirect: '/login'}), (req, res) => {
+router.post("/login", passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
     res.send(req.body.user);
 });
 
@@ -48,10 +48,15 @@ router.post(
     "/register",
     validateRegister,
     catchAsync(async (req, res) => { // TODO: wrap with try catch
-        const { email, username, password } = req.body.user;
-        const user = new User({email, username});
-        const registeredUser = await User.register(user, password);
-        res.redirect(`/users/${user._id}`);
+        try {
+            const { email, username, password } = req.body.user;
+            const user = new User({ email, username });
+            const registeredUser = await User.register(user, password);
+            res.redirect(`/users/${user._id}`);
+        } catch (e) {
+            req.flash('error', e.message);
+            res.redirect('users/register');
+        }
     })
 );
 
