@@ -19,8 +19,6 @@ const badges = require('./routes/badges');
 const rules = require('./routes/rules');
 const tags = require('./routes/tags');
 const users = require('./routes/users');
-const chats = require('./routes/chats');
-const discover = require('./routes/discover');
 
 
 //* db connection
@@ -89,8 +87,6 @@ app.use('/badges', badges);
 app.use('/rules', rules);
 app.use('/tags', tags);
 app.use('/users', users);
-app.use('/chats', chats);
-app.use('/discover', discover);
 
 
 //* chats

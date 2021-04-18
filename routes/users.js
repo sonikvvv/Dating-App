@@ -33,7 +33,7 @@ router.get("/", catchAsync( async (req, res) => {
 }));
 
 router.get("/login", (req, res) => {
-    res.render("log-reg/login");
+    res.render("users/log-reg/login");
 });
 
 router.post("/login", passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
@@ -41,13 +41,13 @@ router.post("/login", passport.authenticate('local', { failureFlash: true, failu
 });
 
 router.get("/register", (req, res) => {
-    res.render("log-reg/register");
+    res.render("users/log-reg/register");
 });
 
 router.post(
     "/register",
     validateRegister,
-    catchAsync(async (req, res) => { // TODO: wrap with try catch
+    catchAsync(async (req, res) => {
         try {
             const { email, username, password } = req.body.user;
             const user = new User({ email, username });
@@ -59,6 +59,22 @@ router.post(
         }
     })
 );
+
+router.get(
+    '/chats',
+    catchAsync(async (req, res) => {
+        const users = await User.find({});
+        res.render('users/chats/chatsPage', { users });
+    })
+);
+
+router.get('/discover', (req, res) => {
+    res.render('users/discover/discoverPage');
+});
+
+router.post('/discover', (req, res) => {
+    res.send(req.body.user);
+});
 
 router.get("/:id", catchAsync( async (req, res) => {
     const { id } = req.params;
