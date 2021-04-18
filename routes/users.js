@@ -6,6 +6,7 @@ const ExpressError = require('../utils/ExpressError');
 const { userSchema, registerSchema } = require("../utils/validationSchemas");
 const router = express.Router();
 const passport = require('passport');
+const { isLoggedIn } = require('../utils/middleware');
 
 const validateUser = (req, res, next) => {
     const { error } = userSchema.validate(req.body);
@@ -37,7 +38,14 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
-    res.send(req.body.user);
+    req.flash('success', 'Welcome back!');
+    res.redirect('/users/discover');
+});
+
+router.get("/logout", (req, res) => {
+    req.logout();
+    req.flash('success', 'Goodbye!');
+    res.redirect('/');
 });
 
 router.get("/register", (req, res) => {
@@ -52,27 +60,28 @@ router.post(
             const { email, username, password } = req.body.user;
             const user = new User({ email, username });
             const registeredUser = await User.register(user, password);
+            req.flash('success', 'Welcome to BlindDatee!');
             res.redirect(`/users/${user._id}`);
         } catch (e) {
             req.flash('error', e.message);
-            res.redirect('users/register');
+            res.redirect('/users/register');
         }
     })
 );
 
 router.get(
-    '/chats',
+    '/chats', isLoggedIn,
     catchAsync(async (req, res) => {
         const users = await User.find({});
         res.render('users/chats/chatsPage', { users });
     })
 );
 
-router.get('/discover', (req, res) => {
+router.get('/discover', isLoggedIn, (req, res) => {
     res.render('users/discover/discoverPage');
 });
 
-router.post('/discover', (req, res) => {
+router.post('/discover', isLoggedIn, (req, res) => {
     res.send(req.body.user);
 });
 
