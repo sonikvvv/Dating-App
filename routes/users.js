@@ -39,7 +39,8 @@ router.get("/login", (req, res) => {
 
 router.post("/login", passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
     req.flash('success', 'Welcome back!');
-    res.redirect('/users/discover');
+    const redirect = req.session.returnTo || '/users/discover';
+    res.redirect(redirect);
 });
 
 router.get("/logout", (req, res) => {
@@ -57,11 +58,14 @@ router.post(
     validateRegister,
     catchAsync(async (req, res) => {
         try {
-            const { email, username, password } = req.body.user;
-            const user = new User({ email, username });
+            const { email, username, password, years } = req.body.user;
+            const user = new User({ email, username, years });
             const registeredUser = await User.register(user, password);
-            req.flash('success', 'Welcome to BlindDatee!');
-            res.redirect(`/users/${user._id}`);
+            req.login(registeredUser, err => {
+                if (err) return next(err);
+                req.flash('success', 'Welcome to BlindDatee!');
+                res.redirect(`/users/${user._id}`);
+            });
         } catch (e) {
             req.flash('error', e.message);
             res.redirect('/users/register');
