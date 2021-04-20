@@ -25,9 +25,11 @@
             <li>SocialLinks:<%= user.socialLincks %></li>
         </ul>
     </section>
-    <a href="/users/<%= user._id %>/edit">Edit</a>
     <a href="/users">all</a>
+    <% if(currentUser && user.equals(currentUser)) {%> 
+    <a href="/users/<%= user._id %>/edit">Edit</a>
     <form action="/users/<%= user._id %>?_method=DELETE" method="post">
         <button class="btn btn-danger">delete</button>
     </form>
+    <% } %> 
 </section>

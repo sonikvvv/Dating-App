@@ -1,15 +1,15 @@
 <% layout('layouts/boilerplate') %>
 
-    <section class="container">
-        <h2>Tags</h2>
-        <a href="/tags/new">ADD</a>
-        <ul>
-            <% for ( let tag of tags) { %>
-                <li>
-                    <a href="/tags/<%= tag._id %>">
-                        <%= tag.title %>
-                    </a>
-                </li>
-                <% } %>
-        </ul>
-    </section>
+<section class="container">
+    <h2>Tags</h2>
+    <% if (currentUser && currentUser.access == "admin") { %>
+    <a href="/tags/new">ADD</a>
+    <% } %>
+    <ul>
+        <% for ( let tag of tags) { %>
+        <li>
+            <a href="/tags/<%= tag._id %>"> <%= tag.title %> </a>
+        </li>
+        <% } %>
+    </ul>
+</section>

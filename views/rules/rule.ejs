@@ -4,8 +4,10 @@
     <h2><%= rule.title %></h2>
     <p><%= rule.description %></p>
     <a href="/rules">all</a>
+    <% if (currentUser && currentUser.access == "admin") { %>
     <a href="/rules/<%= rule._id %>/edit">edit</a>
     <form action="/rules/<%= rule._id %>?_method=DELETE" method="POST">
         <button class="btn btn-danger">Delete</button>
     </form>
+    <% } %>
 </section>

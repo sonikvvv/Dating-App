@@ -1,12 +1,14 @@
 <% layout('layouts/boilerplate') %>
 
 <section class="container">
-  <a href="/rules/new">New</a>
-  <h1>Rules</h1>
-  <% for( let rule of rules ) { %>
+    <% if (currentUser && currentUser.access == "admin") { %>
+    <a href="/rules/new">New</a>
+    <% } %>
+    <h1>Rules</h1>
+    <% for( let rule of rules ) { %>
     <div>
-      <a href="/rules/<%= rule._id %>"><%= rule.title %></a>
-      <p><%= rule.description %> </p>
+        <a href="/rules/<%= rule._id %>"><%= rule.title %></a>
+        <p><%= rule.description %></p>
     </div>
     <% } %>
 </section>
