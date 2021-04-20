@@ -2,31 +2,9 @@ const express = require("express");
 const { isError } = require("joi"); //? do we use it
 const User = require('../utils/models/userModel');
 const catchAsync = require('../utils/catchAsync');
-const ExpressError = require('../utils/ExpressError');
-const { userSchema, registerSchema } = require("../utils/validationSchemas");
 const router = express.Router();
 const passport = require('passport');
-const { isLoggedIn } = require('../utils/middleware');
-
-const validateUser = (req, res, next) => {
-    const { error } = userSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map((el) => el.message).join(', ');
-        throw new ExpressError(msg, 400);
-    } else {
-        next();
-    }
-};
-
-const validateRegister = (req, res, next) => {
-    const { error } = registerSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map((el) => el.message).join(", ");
-        throw new ExpressError(msg, 400);
-    } else {
-        next();
-    }
-};
+const { validateUser, validateRegister, isLoggedIn } = require("../utils/middleware");
 
 router.get("/", catchAsync( async (req, res) => {
     const users = await User.find({});
@@ -38,7 +16,8 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
-    req.flash('success', 'Welcome back!');
+    const user = req.user;
+    req.flash("success", `Welcome back ${user.username}!`);
     const redirect = req.session.returnTo || '/users/discover';
     res.redirect(redirect);
 });
