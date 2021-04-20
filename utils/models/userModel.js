@@ -9,7 +9,7 @@ const UserSchema = new Schema({
         enum: ["admin", "user"],
         default: "user",
     },
-    badges: [Schema.Types.ObjectId],
+    badges: [{ type: Schema.Types.ObjectId, ref: "Tag" }],
     images: [
         {
             type: String,
@@ -47,7 +47,7 @@ const UserSchema = new Schema({
             "Queer",
         ],
     },
-    tags: [Schema.Types.ObjectId],
+    tags: [{type: Schema.Types.ObjectId, ref: "Tag"}],
     description: String,
     position: {
         type: String,
