@@ -6,3 +6,13 @@ module.exports.isLoggedIn = (req, res, next) => {
     }
     next();
 };
+
+module.exports.isAdmin = (req, res, next) => {
+    if (currentUser && currentUser.access == "admin") {
+        return next();
+    }
+    req.flash("error", "You must be admin!");
+    res.redirect("/");
+};
+
+ 
