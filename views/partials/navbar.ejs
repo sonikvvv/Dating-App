@@ -24,6 +24,7 @@
                     <a class="nav-link" href="/users/login">Login</a>
                     <a class="nav-link" href="/users/register">Register</a>
                 <% } else { %>
+                    <a href="/users/<%= currentUser._id %>" class="nav-link"><%= currentUser.username %></a>
                     <a class="nav-link" href="/users/logout">Logout</a>
                 <% } %> 
             </div>
