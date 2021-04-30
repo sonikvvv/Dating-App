@@ -7,6 +7,7 @@
             <section class="d-flex flex-column">
                 <div class="form-floating">
                     <select name="user[sex]" id="sex" class="form-select mb-3">
+                        <option value="">Not selected</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Transgender">Transgender</option>
@@ -15,7 +16,7 @@
                         <option value="Non-Binary">Non-Binary</option>
                         <option value="Genderqueer">Genderqueer</option>
                         <option value="Gender fluid">Gender fluid</option>
-                        <option value="Gender neutral">"Gender neutral</option>
+                        <option value="Gender neutral">Gender neutral</option>
                     </select>
                     <label for="sex">Sex</label>
                 </div>
@@ -26,6 +27,7 @@
                         id="orientation"
                         class="form-select mb-3"
                     >
+                        <option value="">Not selected</option>
                         <option value="Lesbian">Lesbian</option>
                         <option value="Bisexual">Bisexual</option>
                         <option value="Pansexual">Pansexual</option>
@@ -50,7 +52,8 @@
                         min="18"
                         max="90"
                         id="years"
-                        name="user[years-from]"
+                        name="user[years_from]"
+                        value="0"
                     />
                     <label for="years" class="form-label">To</label>
                     <input
@@ -59,7 +62,8 @@
                         min="18"
                         max="90"
                         id="years"
-                        name="user[years-to]"
+                        name="user[years_to]"
+                        value="90"
                     />
                 </section>
 
@@ -69,6 +73,7 @@
                         id="relationshipStatus"
                         class="form-select mb-3"
                     >
+                        <option value="">Not selected</option>
                         <option value="Commited">Commited</option>
                         <option value="Dating">Dating</option>
                         <option value="Engaged">Engaged</option>
@@ -83,58 +88,13 @@
                     <label for="relationshipStatus">Relationship Status</label>
                 </div>
 
-                <section>
-                    <label>Height</label>
-                    <label for="height-from" class="form-label">From</label>
-                    <input
-                        type="range"
-                        class="form-range"
-                        min="130"
-                        max="250"
-                        id="height-from"
-                        name="user[height-from]"
-                    />
-
-                    <label for="height-to" class="form-label">To</label>
-                    <input
-                        type="range"
-                        class="form-range"
-                        min="130"
-                        max="250"
-                        id="height-to"
-                        name="user[height-to]"
-                    />
-                </section>
-
-                <section>
-                    <label>Weight</label>
-                    <label for="weight-from" class="form-label">From</label>
-                    <input
-                        type="range"
-                        class="form-range"
-                        min="130"
-                        max="150"
-                        id="weight-from"
-                        name="user[weight-from]"
-                    />
-
-                    <label for="weight-to" class="form-label">To</label>
-                    <input
-                        type="range"
-                        class="form-range"
-                        min="130"
-                        max="150"
-                        id="weight-to"
-                        name="user[weight-to]"
-                    />
-                </section>
-
                 <div class="form-floating">
                     <select
                         name="user[bodyType]"
                         id="bodyType"
                         class="form-select mb-3"
                     >
+                        <option value="">Not selected</option>
                         <option value="Average">Average</option>
                         <option value="Large">Large</option>
                         <option value="Muscular">Muscular</option>
