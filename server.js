@@ -15,10 +15,10 @@ const User = require('./utils/models/userModel');
 
 
 //* routs
-const badges = require('./routes/badges');
-const rules = require('./routes/rules');
-const tags = require('./routes/tags');
-const users = require('./routes/users');
+const badgesRoutes = require('./routes/badges');
+const rulesRoutes = require('./routes/rules');
+const tagsRoutes = require('./routes/tags');
+const usersRoutes = require('./routes/users');
 
 
 //* db connection
@@ -78,25 +78,34 @@ app.use((req, res, next) => {
     next();
 });
 
+
 //* routs
 app.get('/', (req, res) => {
     res.render('home');
 });
 
-app.use('/badges', badges);
-app.use('/rules', rules);
-app.use('/tags', tags);
-app.use('/users', users);
+app.use('/badges', badgesRoutes);
+app.use('/rules', rulesRoutes);
+app.use('/tags', tagsRoutes);
+app.use('/users', usersRoutes);
 
 
 //* chats
+let chatUsers = [];
+
 io.on('connection', (socket) => {
     console.log('a user connected');
     socket.on('disconnect', () => {
         console.log('user disconnected');
     });
-    socket.on('chat message', (msg) => {
-        io.emit('chat message', msg);
+
+    socket.on('newUser', (user) => {
+        chatUsers[user] = socket.id;
+    });
+
+    socket.on('message', (data) => {
+        const reciever = chatUsers[data.reciever];
+        io.to(reciever).emit('message', data);
     });
 });
 

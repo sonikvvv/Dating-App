@@ -6,7 +6,7 @@
 			<% for( let user of users ) { %>
 				<div>
 					<img src="" alt="">
-					<h4><%= user.firstName %> <%= user.middleName %> <%= user.latsName %></h4>
+					<li><button onclick="onUserSelected(this.innerHTML)"><%= user.username %></button></li>
 				</div>
 				<% } %>
 		</section>
