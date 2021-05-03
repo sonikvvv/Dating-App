@@ -12,6 +12,8 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./utils/models/userModel');
+const Chat = require('./utils/models/chatModel');
+const Message = require('./utils/models/messageModel');
 
 
 //* routs
@@ -99,13 +101,49 @@ io.on('connection', (socket) => {
         console.log('user disconnected');
     });
 
-    socket.on('newUser', (user) => {
-        chatUsers[user] = socket.id;
+    socket.on('new user', async (username) => {
+        const user = await User.findOne({ username });
+        chatUsers[username] = { socket: socket.id, userId: user._id};
+        io.to(socket.id).emit("new user", user._id);
     });
 
-    socket.on('message', (data) => {
-        const reciever = chatUsers[data.reciever];
-        io.to(reciever).emit('message', data);
+    socket.on('chat history', async (data) => {
+        const senderSocket = chatUsers[data.sender].socket;
+        // console.log(`data `, data);
+        const chatParticipants = await User.find({ username: { $in: [data.sender, data.receiver] } });
+        // console.log(`chat participants ${chatParticipants}`);
+        const chat = await Chat.findOne({ //FIXME: terurns the chat if one of the values are similar 
+            participants: { $in: [
+                chatParticipants[0]._id,
+                chatParticipants[1]._id,
+            ]},
+        }).populate('messages');
+        // console.log(`chat${chat}`);
+        io.to(senderSocket).emit('chat history', chat);
+    });
+
+    socket.on('message', async (data) => {
+        const { message, author, receiver, chatID } = data;
+
+        const receiverSocket = chatUsers[receiver.receiverName]
+            ? chatUsers[receiver.receiverName].socket
+            : null;
+
+        if (receiverSocket) {
+            io.to(receiverSocket).emit("message", data);
+        }
+
+        const msg = new Message({
+            sender: author.authorID,
+            receiver: receiver.receiverID,
+            content: message,
+        });
+        msg.save();
+        
+        const chat = await Chat.findById(chatID);
+        await Chat.findByIdAndUpdate(chat._id, {
+            $push: { messages: msg._id },
+        });
     });
 });
 
