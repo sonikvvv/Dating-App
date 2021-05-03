@@ -1,0 +1,24 @@
+.receiver {
+    margin-right: 20rem;
+    justify-content: start;
+}
+
+.chat_card:hover {
+    background-color: rgba(128, 128, 128, 0.199);
+}
+
+.message {
+    padding-bottom: 0.85rem;
+    padding-top: 0.65rem;
+    border-radius: 1.5rem;
+    text-align: start;
+    padding-left: 0.8rem;
+    font-size: medium;
+    font-weight: normal;
+    line-height: 1.2rem;
+}
+
+.sender {
+    margin-left: 15rem;
+    justify-content: flex-end;
+}
