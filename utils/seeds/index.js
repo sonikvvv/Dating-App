@@ -59,7 +59,7 @@ const seedDB = async () => {
             email: userSeeds[i].email,
             description: userSeeds[i].description,
             orientation: userSeeds[i].orientation,
-            age: userSeeds[i].age,
+            years: userSeeds[i].years,
             position: userSeeds[i].position,
             height: userSeeds[i].height,
             weight: userSeeds[i].weight,
