@@ -47,7 +47,7 @@ const UserSchema = new Schema({
             "Queer",
         ],
     },
-    tags: [{type: Schema.Types.ObjectId, ref: "Tag"}],
+    tags: [{ type: Schema.Types.ObjectId, ref: "Tag" }],
     description: String,
     position: {
         type: String,
