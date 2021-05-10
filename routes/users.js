@@ -9,6 +9,8 @@ const {
     validateRegister,
     isLoggedIn,
 } = require("../utils/middleware");
+const { ObjectId } = require("mongodb");
+const Chat = require('../utils/models/chatModel');
 
 router.get(
     "/",
@@ -69,46 +71,101 @@ router.post(
 router.get(
     "/chats",
     isLoggedIn,
-    catchAsync(async (req, res) => {
+    catchAsync(async (req, res) => { //TODO: display the users from liked array
         const users = await User.find({});
         res.render("users/chats/chatsPage", { users });
     })
 );
 
-router.get("/discover", isLoggedIn, (req, res) => { // TODO: visualize the users
-    if (req.session.filterResult){
-        const users = req.session.filterResult;
-        return res.render("users/discover/discoverPage");
-    }
-    res.render("users/discover/discoverPage");
-});
-
-router.post(
+router.get(
     "/discover",
     isLoggedIn,
     catchAsync(async (req, res) => {
-        const {
-            sex,
-            orientation,
-            years_from,
-            years_to,
-            relationshipStatus,
-            bodyType,
-        } = req.body.user;
+        const filter = req.user.filter;
+        let exclude = [];
+        exclude.push(ObjectId(req.user._id));
 
-        // checking if the're is data & making the filter
-        let filter = {};
-        if (sex) filter.sex = sex;
-        if (orientation) filter.orientation = orientation;
-        if (years_from && years_to) {
-            filter.years = { $gte: years_from, $lte: years_to };
-        } 
-        if (relationshipStatus) filter.relationshipStatus = relationshipStatus;
-        if (bodyType) filter.bodyType = bodyType;
+        req.user.liked.forEach((el) => {
+            exclude.push(ObjectId(el.userId));
+        });
 
-        const users = await User.find({ ...filter });
-        req.session.filterResult = users;
-        res.redirect('/users/discover');
+        req.user.disliked.forEach((el) => {
+            exclude.push(ObjectId(el));
+        });
+
+        let excludeFilter = {};
+        excludeFilter._id = { $nin: exclude };
+        if (filter.years.years_from && filter.years.years_to) {
+            excludeFilter.years = {
+                $gte: filter.years.years_from,
+                $lte: filter.years.years_to,
+            };
+        }
+        if (filter.sex || filter.sex != "") excludeFilter.sex = filter.sex;
+        if (filter.user_orientation || filter.user_orientation != "")
+            excludeFilter.orientation = filter.user_orientation;
+        if (filter.relationshipStatus || filter.relationshipStatus != "")
+            excludeFilter.relationshipStatus = filter.relationshipStatus;
+        if (filter.bodyType || filter.bodyType != "")
+            excludeFilter.bodyType = filter.bodyType;
+
+        const user = await User.findOne(excludeFilter);
+        res.render("users/discover/discoverPage", { user });
+    })
+);
+
+router.get(
+    "/discover/:id/:liked",
+    isLoggedIn,
+    catchAsync(async (req, res) => {
+        const { id, liked } = req.params;
+        const user = req.user;
+        
+        if (liked == "true") {
+            const likedUser = await User.findById(id);
+            if (likedUser.liked.length != 0) {
+                for (let index = 0; index < likedUser.liked.length; index++) {
+                    const element = likedUser.liked[index];
+                    if (element.userId.equals(user._id)) {
+                        const chat = new Chat();
+                        chat.participants.push(user._id, id);
+                        chat.save();
+                        user.liked.push({ userId: id, chatId: chat._id });
+                        likedUser.liked[index].chatId = chat._id;
+                        await User.findByIdAndUpdate(id, { ...likedUser });
+                        req.flash("success", "You have a match!");
+                        break;
+                    }
+                }
+            } else  {
+                user.liked.push({ userId: id });
+                await User.findByIdAndUpdate(user._id, { ...user });
+            }
+        } else user.disliked.push(id);
+
+        await User.findByIdAndUpdate(user._id, { ...user });
+        res.redirect("/users/discover");
+    })
+);
+    
+router.get("/settings", isLoggedIn, (req, res) => {
+    const filter = req.user.filter;
+    res.render("users/settings/settings", { filter });
+});
+
+router.get("/settings/edit", isLoggedIn, (req, res) => {
+    res.render("users/settings/edit");
+});
+
+router.post(
+    "/settings",
+    isLoggedIn,
+    catchAsync(async (req, res) => {
+        const user = req.user;
+        user.filter = req.body.filter;
+
+        await User.findByIdAndUpdate(user._id, { ...user });
+        res.redirect("/users/settings");
     })
 );
 
