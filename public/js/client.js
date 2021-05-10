@@ -3,7 +3,7 @@ let socket = io();
 let form = document.getElementById("form");
 let input = document.getElementById("input");
 let messages = document.getElementById("messages");
-const authorName = document.getElementById("username").innerText;
+const authorName = document.getElementById("username").innerText.replace(' ', '');
 let receiverName;
 let chatID;
 let authorID;

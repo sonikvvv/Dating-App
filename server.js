@@ -112,7 +112,7 @@ io.on('connection', (socket) => {
         // console.log(`data `, data);
         const chatParticipants = await User.find({ username: { $in: [data.sender, data.receiver] } });
         // console.log(`chat participants ${chatParticipants}`);
-        const chat = await Chat.findOne({ //FIXME: terurns the chat if one of the values are similar 
+        const chat = await Chat.findOne({ //FIXME: terurns the chat if one of the values are similar convert the ids to ObjectId
             participants: { $in: [
                 chatParticipants[0]._id,
                 chatParticipants[1]._id,
