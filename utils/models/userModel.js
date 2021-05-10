@@ -9,7 +9,7 @@ const UserSchema = new Schema({
         enum: ["admin", "user"],
         default: "user",
     },
-    badges: [{ type: Schema.Types.ObjectId, ref: "Tag" }],
+    badges: [{ type: Schema.Types.ObjectId, ref: "Badge" }],
     images: [
         {
             type: String,
@@ -81,6 +81,24 @@ const UserSchema = new Schema({
         enum: ["Peasant", "Aristocrat", "King / Queen", "God Mode"],
         default: "Peasant",
     },
+    filter: {
+        sex: { type: String },
+        user_orientation: { type: String },
+        years: {
+            years_from: { type: Number },
+            years_to: { type: Number },
+        },
+        relationshipStatus: { type: String },
+        bodyType: { type: String },
+    },
+    liked: [
+        {
+            _id: false,
+            chatId: { type: Schema.Types.ObjectId, ref: "Chat" },
+            userId: { type: Schema.Types.ObjectId, ref: "User" },
+        },
+    ],
+    disliked: [{ type: Schema.Types.ObjectId, ref: "User" }],
 });
 
 UserSchema.plugin(passportLocalMongoose);
