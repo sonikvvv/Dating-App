@@ -71,7 +71,7 @@ router.post(
 router.get(
     "/chats",
     isLoggedIn,
-    catchAsync(async (req, res) => { // TODO: display the users from liked array
+    catchAsync(async (req, res) => {
         let chatUserIds = [];
         req.user.liked.forEach((el) => {
             if (el.chatId) {
@@ -171,7 +171,7 @@ router.post(
         user.filter = req.body.filter;
 
         await User.findByIdAndUpdate(user._id, { ...user });
-        res.redirect("/users/settings");
+        res.redirect("/users/discover");
     })
 );
 
