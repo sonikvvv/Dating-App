@@ -71,8 +71,14 @@ router.post(
 router.get(
     "/chats",
     isLoggedIn,
-    catchAsync(async (req, res) => { //TODO: display the users from liked array
-        const users = await User.find({});
+    catchAsync(async (req, res) => { // TODO: display the users from liked array
+        let chatUserIds = [];
+        req.user.liked.forEach((el) => {
+            if (el.chatId) {
+                chatUserIds.push(el.userId);
+            }
+        });
+        let users = await User.find({_id: {$in: chatUserIds}});
         res.render("users/chats/chatsPage", { users });
     })
 );

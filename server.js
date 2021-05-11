@@ -14,6 +14,7 @@ const LocalStrategy = require('passport-local');
 const User = require('./utils/models/userModel');
 const Chat = require('./utils/models/chatModel');
 const Message = require('./utils/models/messageModel');
+const { ObjectId } = require("mongodb");
 
 
 //* routs
@@ -109,16 +110,13 @@ io.on('connection', (socket) => {
 
     socket.on('chat history', async (data) => {
         const senderSocket = chatUsers[data.sender].socket;
-        // console.log(`data `, data);
         const chatParticipants = await User.find({ username: { $in: [data.sender, data.receiver] } });
-        // console.log(`chat participants ${chatParticipants}`);
-        const chat = await Chat.findOne({ //FIXME: terurns the chat if one of the values are similar convert the ids to ObjectId
+        const chat = await Chat.findOne({
             participants: { $in: [
-                chatParticipants[0]._id,
-                chatParticipants[1]._id,
+                ObjectId(chatParticipants[0]._id),
+                ObjectId(chatParticipants[1]._id),
             ]},
         }).populate('messages');
-        // console.log(`chat${chat}`);
         io.to(senderSocket).emit('chat history', chat);
     });
 
@@ -141,9 +139,8 @@ io.on('connection', (socket) => {
         msg.save();
         
         const chat = await Chat.findById(chatID);
-        await Chat.findByIdAndUpdate(chat._id, {
-            $push: { messages: msg._id },
-        });
+        chat.messages.push(msg._id);
+        await Chat.findByIdAndUpdate(chat._id, { ...chat });
     });
 });
 
