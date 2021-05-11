@@ -1,16 +1,20 @@
 <% layout('layouts/boilerplate') %>
 
+	<% if (users) { %>
 	<section class="container d-flex flex-row my-2">
 		<section class="container col-md-4">
 			<% for( let user of users ) { %>
 				<div class="card mb-3 chat_card" onclick="onUserSelected(this.innerText)">
 					<div class="row g-0">
 						<div class="col-md-3">
-							<img src="../images/yuriy-mlcn-3MORfl6x1Yg-unsplash.jpg" alt="..." class="img-fluid rounded-circle m-3">
+							<img src="../images/yuriy-mlcn-3MORfl6x1Yg-unsplash.jpg" alt="..."
+								class="img-fluid rounded-circle m-3">
 						</div>
 						<div class="col-md-9">
 							<div class="card-body">
-								<h5 class="card-title"><%= user.username %></h5>
+								<h5 class="card-title">
+									<%= user.username %>
+								</h5>
 							</div>
 						</div>
 					</div>
@@ -29,6 +33,13 @@
 			</div>
 		</section>
 	</section>
+	<% } else { %>
+		<sectio class="container d-flex justify-content-center">
+			<div class="alert alert-light">
+				<h3>WOW no chats. Go make <a href="/users/discover" class="alert-link">matches</a>.</h3>
+			</div>
+		</sectio>
+	<% } %>
 
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="/js/client.js"></script>
