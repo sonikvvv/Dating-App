@@ -11,6 +11,9 @@ const {
 } = require("../utils/middleware");
 const { ObjectId } = require("mongodb");
 const Chat = require('../utils/models/chatModel');
+const multer = require("multer");
+const { storage } = require("../cloudinary");
+const upload = multer({ storage });
 
 router.get(
     "/",
@@ -194,10 +197,15 @@ router.get(
 
 router.put(
     "/:id",
+    upload.array("images"),
     validateUser,
     catchAsync(async (req, res) => {
         const { id } = req.params;
-        const user = await User.findByIdAndUpdate(id, { ...req.body.user });
+        const images = req.files.map(f => ({ url: f.path, filename: f.filename }));
+        const user = await User.findByIdAndUpdate(id, {
+            ...req.body.user,
+            images,
+        });
         res.render("users/userPage", { user });
     })
 );
