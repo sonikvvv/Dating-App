@@ -4,7 +4,12 @@ const Schema = mongoose.Schema;
 const BadgeSchema = new Schema({
     title: String,
     description: String,
-    image: String
+    image: 
+        {
+            url: String,
+            filename: String,
+        },
+    
 });
 
 module.exports = mongoose.model('Badge', BadgeSchema);
