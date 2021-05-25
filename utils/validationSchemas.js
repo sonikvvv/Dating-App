@@ -34,7 +34,6 @@ module.exports.userSchema = Joi.object({
         username: Joi.string().required(),
         email: Joi.string().email().required(),
         years: Joi.number().greater(18).required(),
-        images: Joi.string().allow(""),
         sex: Joi.string().allow(""),
         work: Joi.string().allow(""),
         orientation: Joi.string().allow(""),

@@ -13,7 +13,8 @@ const UserSchema = new Schema({
     badges: [{ type: Schema.Types.ObjectId, ref: "Badge" }],
     images: [
         {
-            type: String,
+            url: String,
+            filename: String,
         },
     ],
     years: Number,

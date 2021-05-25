@@ -7,6 +7,7 @@
         method="POST"
         class="needs-validation"
         novalidate
+        enctype="multipart/form-data"
     >
         <section class="d-flex flex-column">
             <div class="form-floating">
@@ -34,16 +35,9 @@
                 <label for="email">Email</label>
             </div>
 
-            <div class="form-floating">
-                <input
-                    type="text"
-                    class="form-control mb-3"
-                    placeholder="images"
-                    name="user[images]"
-                    id="images"
-                    value="<%= user.images %>"
-                />
-                <label for="images">Images</label>
+            <div class="mb-3">
+                <label for="formFileMultiple" class="form-label">Images:</label>
+                <input class="form-control" type="file" id="formFileMultiple" name="images" multiple>
             </div>
 
             <div class="form-floating">
@@ -115,9 +109,7 @@
                     id="description"
                     cols="30"
                     rows="2"
-                >
-<%= user.description %></textarea
-                >
+                ><%= user.description %></textarea>
                 <label for="description">Description</label>
             </div>
 

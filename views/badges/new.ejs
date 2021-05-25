@@ -2,7 +2,7 @@
 
     <section class="container">
         <h2>New Badge</h2>
-        <form action="/badges" method="post" novalidate class="form-floating needs-validation">
+        <form action="/badges" method="post" novalidate class="form-floating needs-validation" enctype="multipart/form-data">
             <div>
                 <div class="form-floating mb-3">
                     <input type="text" id="title" name="badge[title]" placeholder="Title" class="form-control" required>
@@ -13,6 +13,10 @@
                     <textarea name="badge[description]" id="description" cols="10" rows="2" class="form-control"
                         placeholder="Description" required></textarea>
                     <label for="description">Description</label>
+                </div>
+                <div class="mb-3">
+                    <label for="formFileMultiple" class="form-label">Image:</label>
+                    <input class="form-control" type="file" id="formFileMultiple" name="image">
                 </div>
             </div>
             <button class="btn btn-success">Save</button>

@@ -3,6 +3,9 @@ const Badge = require("../utils/models/badgeModel");
 const catchAsync = require("../utils/catchAsync");
 const router = express.Router();
 const { validateBadge, isLoggedIn, isAdmin } = require("../utils/middleware");
+const multer = require("multer");
+const { storage } = require("../cloudinary");
+const upload = multer({ storage });
 
 router.get(
     "/",
@@ -36,15 +39,29 @@ router.get(
 
 router.post(
     "/",
+    upload.single("image"),
     validateBadge,
     isLoggedIn,
     isAdmin,
     catchAsync(async (req, res) => {
+        const image = req.file;
         const badge = new Badge(req.body.badge);
+        badge.image = { url: image.path, filename: image.filename };
         await badge.save();
+        console.log(badge);
         res.redirect(`/badges/${badge._id}`);
     })
 );
+
+// router.post(
+//     "/",
+//     upload.single('image'),
+//     (req, res) => {
+        
+//         console.log(req.body, req.file);
+//         res.send("meh");
+//     }
+// );
 
 router.put(
     "/:id",
