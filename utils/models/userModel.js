@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
+const Chat = require("./chatModel");
 
 const UserSchema = new Schema({
     email: String,
@@ -99,6 +100,16 @@ const UserSchema = new Schema({
         },
     ],
     disliked: [{ type: Schema.Types.ObjectId, ref: "User" }],
+});
+
+UserSchema.post("findByIdAndDelete", async function (doc) {
+    if (doc){
+        doc.licked.forEach(like => {
+            if (like.chatId) {
+                await Chat.findByIdAndDelete(like.chatId);
+            }
+        })
+    }
 });
 
 UserSchema.plugin(passportLocalMongoose);
