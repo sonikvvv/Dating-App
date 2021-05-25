@@ -56,7 +56,11 @@
                 <li>Work:<%= user.work %></li>
                 <li>Orientation:<%= user.orientation %></li>
                 <li>Age:<%= user.years %></li>
-                <li>Tags:<%= user.tags %></li>
+                <li>Tags:<% user.tags.forEach(tag => { %>
+                    <span class="badge rounded-pill bg-secondary">
+                        <%= tag.title %>
+                    </span>
+                <% }) %></li>
                 <li>Position:<%= user.position %></li>
                 <li>Height:<%= user.height %></li>
                 <li>Weight:<%= user.weight %></li>
@@ -66,12 +70,8 @@
                 <li>SocialLinks:<%= user.socialLincks %></li>
             </ul>
         </section>
-        <a href="/users">all</a>
         <% if(currentUser && user.equals(currentUser)) {%>
         <a href="/users/<%= user._id %>/edit">Edit</a>
-        <form action="/users/<%= user._id %>?_method=DELETE" method="post">
-            <button class="btn btn-danger">delete</button>
-        </form>
         <% } %>
     </div>
 </section>

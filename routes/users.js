@@ -216,7 +216,7 @@ router.get(
     "/:id",
     catchAsync(async (req, res) => {
         const { id } = req.params;
-        const user = await User.findById(id);
+        const user = await User.findById(id).populate('tags');
         res.render("users/userPage", { user });
     })
 );
