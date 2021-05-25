@@ -9,7 +9,9 @@
             <div class="navbar-nav">
                 <a class="nav-link" href="/users/discover">Discover</a>
                 <a class="nav-link" href="/users/chats">Chats</a>
-                <a class="nav-link" href="/users/settings">Filter</a>
+                <% if (currentUser) { %>
+                    <a class="nav-link" href="/users/settings">Filter</a>
+                <% } %> 
                 <a class="nav-link" href="/rules">Rules</a>
                 <a class="nav-link" href="/badges">Badges</a>
             </div>
@@ -17,27 +19,23 @@
                 <% if (!currentUser) { %>
                     <a class="nav-link" href="/users/login">Login</a>
                     <a class="nav-link" href="/users/register">Register</a>
-                    <% } else { %>
-                        <!-- <a href="/users/<%= currentUser._id %>" class="nav-link" id="username">
-                            <%= currentUser.username %>
-                        </a>
-                        <a class="nav-link" href="/users/logout">Logout</a> -->
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="username" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <%= currentUser.username %>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end"
-                                    aria-labelledby="navbarDarkDropdownMenuLink">
-                                    <li><a class="dropdown-item" href="/users/<%= currentUser._id %>">Profile</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="/users/settings">Settings</a></li>
-                                    <li><a class="dropdown-item" href="/users/logout">Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    <% } %>
+                <% } else { %>
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="username" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <%= currentUser.username %>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end"
+                                aria-labelledby="navbarDarkDropdownMenuLink">
+                                <li><a class="dropdown-item" href="/users/<%= currentUser._id %>">Profile</a>
+                                </li>
+                                <li><a class="dropdown-item" href="/users/settings">Settings</a></li>
+                                <li><a class="dropdown-item" href="/users/logout">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                <% } %>
             </div>
         </div>
     </div>
