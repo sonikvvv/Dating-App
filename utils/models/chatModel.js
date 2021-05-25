@@ -9,7 +9,7 @@ const ChatSchema = new Schema({
 
 ChatSchema.post("findByIdAndDelete", async function (doc) {
     if (doc) {
-        doc.messages.forEach((message) => {
+        doc.messages.forEach(async (message) => {
             await Message.findByIdAndDelete(message._id);
         });
     }

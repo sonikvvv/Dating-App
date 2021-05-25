@@ -105,7 +105,7 @@ const UserSchema = new Schema({
 
 UserSchema.post("findByIdAndDelete", async function (doc) {
     if (doc){
-        doc.licked.forEach(like => {
+        doc.licked.forEach(async (like) => {
             if (like.chatId) {
                 await Chat.findByIdAndDelete(like.chatId);
             }
