@@ -12,9 +12,6 @@ const {
 const { ObjectId } = require("mongodb");
 const Chat = require('../utils/models/chatModel');
 const Tag = require("../utils/models/tagModel");
-const multer = require("multer");
-const { storage } = require("../cloudinary");
-const upload = multer({ storage });
 
 router.get(
     "/",
@@ -231,15 +228,10 @@ router.get(
 
 router.put(
     "/:id",
-    upload.array("images"),
     validateUser,
-    catchAsync(async (req, res) => {
+    catchAsync(async (req, res) => { // TODO: Fix the disapiring images and tags
         const { id } = req.params;
-        const images = req.files.map(f => ({ url: f.path, filename: f.filename }));
-        const user = await User.findByIdAndUpdate(id, {
-            ...req.body.user,
-            images,
-        });
+        const user = await User.findByIdAndUpdate(id, { ...req.body.user });
         res.render("users/userPage", { user });
     })
 );

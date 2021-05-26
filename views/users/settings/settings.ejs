@@ -1,48 +1,70 @@
 <% layout('layouts/boilerplate') %>
 
+<% const filter = user.filter %>
+
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">Filter</h5>
         <ul class="list-group list-group-flush">
             <% if (filter.sex && filter.sex !="" ) { %>
-                <li class="list-group-item">Sex:
-                    <%= filter.sex %>
-                        <% } else { %>
-                <li class="list-group-item text-muted">Sex:
-                    <% } %>
-                </li>
-
-            <% if (filter.user_orientation && filter.user_orientation != "") { %>
-                <li class="list-group-item">Orientation:
-                <%= filter.user_orientation %>
-            <% } else { %>
-                <li class="list-group-item text-muted">Orientation:
-            <% } %> 
+            <li class="list-group-item">
+                Sex: <%= filter.sex %> <% } else { %>
             </li>
+
+            <li class="list-group-item text-muted">Sex: <% } %></li>
+
+            <% if (filter.user_orientation && filter.user_orientation != "") {
+            %>
+            <li class="list-group-item">
+                Orientation: <%= filter.user_orientation %> <% } else { %>
+            </li>
+
+            <li class="list-group-item text-muted">Orientation: <% } %></li>
 
             <% if (filter.years.years_to && filter.years.years_from) { %>
-                <li class="list-group-item">Years:
-                <%= filter.years.years_from %> to <%= filter.years.years_to %>
-            <% } else { %>
-                <li class="list-group-item text-muted">Years:
-            <% } %> 
+            <li class="list-group-item">
+                Years: <%= filter.years.years_from %> to <%=
+                filter.years.years_to %> <% } else { %>
             </li>
 
-            <% if (filter.relationshipStatus && filter.relationshipStatus != "") { %>
-                <li class="list-group-item">Relationship Status:
-                <%= filter.relationshipStatus %>
-            <% } else { %>
-                <li class="list-group-item text-muted">Relationship Status:
-            <% } %> 
+            <li class="list-group-item text-muted">Years: <% } %></li>
+
+            <% if (filter.relationshipStatus && filter.relationshipStatus != "")
+            { %>
+            <li class="list-group-item">
+                Relationship Status: <%= filter.relationshipStatus %> <% } else
+                { %>
+            </li>
+
+            <li class="list-group-item text-muted">
+                Relationship Status: <% } %>
             </li>
 
             <% if (filter.bodyType && filter.bodyType != "") { %>
-                <li class="list-group-item">Body Type:
-                <%= filter.bodyType %>
-            <% } else { %>
-                <li class="list-group-item text-muted">Body Type:
-            <% } %> 
+            <li class="list-group-item">
+                Body Type: <%= filter.bodyType %> <% } else { %>
             </li>
+
+            <li class="list-group-item text-muted">Body Type: <% } %></li>
+        </ul>
+        <a href="/users/settings/edit" class="btn btn-primary mt-2">Edit</a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Photos <i class="bi bi-card-image"></i></h5>
+        <ul class="list-group list-group-flush">
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <% if (user.images && user.images.lenght != 0) { %>
+                    <% user.images.map(img => { %>
+                    <div class="col">
+                        <div class="card">
+                            <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="..." />
+                        </div>
+                    </div>
+                <% }); } %>
+            </div>
         </ul>
         <a href="/users/settings/edit" class="btn btn-primary mt-2">Edit</a>
     </div>
