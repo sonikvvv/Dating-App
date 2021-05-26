@@ -53,24 +53,18 @@ router.post(
     })
 );
 
-// router.post(
-//     "/",
-//     upload.single('image'),
-//     (req, res) => {
-        
-//         console.log(req.body, req.file);
-//         res.send("meh");
-//     }
-// );
-
 router.put(
     "/:id",
+    upload.single("image"),
     validateBadge,
     isLoggedIn,
     isAdmin,
     catchAsync(async (req, res) => {
         const { id } = req.params;
-        const badge = await Badge.findByIdAndUpdate(id, { ...req.body.badge });
+        const image = req.file;
+        const badge = await Badge.findById(id);
+        badge.image = { url: image.path, filename: image.filename };
+        await Badge.findByIdAndUpdate(id, { ...badge });
         res.redirect(`/badges/${badge._id}`);
     })
 );
