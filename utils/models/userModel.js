@@ -2,6 +2,21 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
 const Chat = require("./chatModel");
+const { cloudinary } = require("../../cloudinary/index");
+
+const ImageSchema = new Schema({
+    url: String,
+    filename: String,
+    _id: false,
+});
+
+ImageSchema.virtual("thumbnail").get(function () {
+    return this.url.replace("/upload", "/upload/w_200");
+});
+
+ImageSchema.virtual("circle").get(function () {
+    return this.url.replace("/upload", "/upload/c_lfill,h_150,r_max,w_150");
+});
 
 const UserSchema = new Schema({
     email: String,
@@ -11,12 +26,7 @@ const UserSchema = new Schema({
         default: "user",
     },
     badges: [{ type: Schema.Types.ObjectId, ref: "Badge" }],
-    images: [
-        {
-            url: String,
-            filename: String,
-        },
-    ],
+    images: [ImageSchema],
     years: Number,
     sex: {
         type: String,
@@ -109,7 +119,11 @@ UserSchema.post("findByIdAndDelete", async function (doc) {
             if (like.chatId) {
                 await Chat.findByIdAndDelete(like.chatId);
             }
-        })
+        });
+
+        doc.images.forEach(async (img) => {
+            await cloudinary.uploader.destroy(img.filename);
+        });
     }
 });
 
