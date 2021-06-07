@@ -1,0 +1,70 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Photos</h5>
+            <ul class="list-group list-group-flush">
+                <form action="/settings/images" method="post" class="row justify-content-between"
+                    enctype="multipart/form-data">
+                    <input class="form-control" type="file" id="formFile" onchange="changeBg(this.id)" name="images"
+                        multiple>
+                    <% for( let index=0; index < 5; index++ ) { %>
+                        <div class="col">
+                            <div class="card justify-content-center align-items-center img-card <%= user.images[index]? 'full' :'empty' %>"
+                                id="<%= index %>">
+                                <% if (user.images[index]) { %>
+                                    <img src="<%= user.images[index].url %>" alt="..."
+                                        style="width: 10rem; height: 15rem;" />
+                                    <input type="checkbox" name="deleteImages[]" id="file-<%= index %>"
+                                        class="btn-check" value="<%= user.images[index].filename %>" hidden>
+                                    <label for="file-<%= index %>" class="btn btn-outline-secondary"><i
+                                            class="bi bi-trash" style="font-size: 2rem;"></i></label>
+                                    <% } else { %>
+                                        <i class="bi bi-person-fill" style="font-size: 10rem;"></i>
+                                        <!-- <label for="formFile-<%= index %>" class="my-1 btn "><i class="bi bi-pencil"
+                                                style="font-size: 2rem;"></i></label>
+                                        <input class="form-control" type="file" id="formFile-<%= index %>" hidden
+                                            onchange="changeBg(this.id)" name="images"> -->
+                                        <% } %>
+                            </div>
+                        </div>
+                        <% } %>
+                            <div class="container">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                </form>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function changeBg(id) {
+            const input = document.querySelector(`#${id}`);
+            const empty = document.querySelectorAll(".empty");
+            let index = 0;
+            const limit = input.files.length;
+
+            empty.forEach(el => {
+                const div = document.getElementById(`${el.id}`);
+
+                if (index < limit) {
+
+                    div.innerHTML = "";
+                    let url = URL.createObjectURL(input.files[index]);
+                    let image = document.createElement("img");
+                    image.src = url;
+                    image.style.width = "10rem";
+                    image.style.height = "15rem";
+
+
+                    div.appendChild(image);
+                    div.innerHTML = div.innerHTML;
+                    div.classList.replace("empty", "full");
+                }
+                index++;
+            })
+
+
+        }
+
+    </script>

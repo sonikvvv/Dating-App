@@ -7,7 +7,7 @@
             class="carousel slide"
             data-bs-ride="carousel"
         >
-            <div class="carousel-inner">
+            <div class="carousel-inner" style="width: 20rem;">
                 <% user.images.forEach((image, i) => { %>
                     <div class="carousel-item  <%= i === 0 ? 'active' : '' %>">
                         <img src="<%= image.url %>" class="d-block w-100" alt="..." />
@@ -43,11 +43,13 @@
         </div>
     </div>
     <div class="container">
-        <h2><%= user.username %> Level:<%= user.level %></h2>
+        <h2><%= user.username %> <%= user.years %> <h5>Level: <%= user.level %></h5></h2>
         <p><%= user.description %></p>
         <section>
             <% for( let tag of user.tags ) { %>
-            <div><%= tag.title %></div>
+                <span class="badge rounded-pill bg-secondary">
+                    <%= tag.title %>
+                </span>
             <% } %>
         </section>
         <section>
@@ -55,19 +57,12 @@
                 <li>Sex:<%= user.sex %></li>
                 <li>Work:<%= user.work %></li>
                 <li>Orientation:<%= user.orientation %></li>
-                <li>Age:<%= user.years %></li>
-                <li>Tags:<% user.tags.forEach(tag => { %>
-                    <span class="badge rounded-pill bg-secondary">
-                        <%= tag.title %>
-                    </span>
-                <% }) %></li>
                 <li>Position:<%= user.position %></li>
                 <li>Height:<%= user.height %></li>
                 <li>Weight:<%= user.weight %></li>
                 <li>BodyType:<%= user.bodyType %></li>
                 <li>RelationshipStatus:<%= user.relationshipStatus %></li>
                 <li>NSFW:<%= user.nsfw %></li>
-                <li>SocialLinks:<%= user.socialLincks %></li>
             </ul>
         </section>
         <% if(currentUser && user.equals(currentUser)) {%>

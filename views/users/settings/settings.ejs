@@ -47,25 +47,25 @@
 
             <li class="list-group-item text-muted">Body Type: <% } %></li>
         </ul>
-        <a href="/users/settings/edit" class="btn btn-primary mt-2">Edit</a>
+        <a href="/settings/filter" class="btn btn-primary mt-2">Edit</a>
     </div>
 </div>
 
 <div class="card">
     <div class="card-body">
-        <h5 class="card-title">Photos <i class="bi bi-card-image"></i></h5>
+        <h5 class="card-title">Photos</h5>
         <ul class="list-group list-group-flush">
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 <% if (user.images && user.images.lenght != 0) { %>
                     <% user.images.map(img => { %>
                     <div class="col">
-                        <div class="card">
+                        <div class="card" style="width: 10rem;">
                             <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="..." />
                         </div>
                     </div>
                 <% }); } %>
             </div>
         </ul>
-        <a href="/users/settings/edit" class="btn btn-primary mt-2">Edit</a>
+        <a href="/settings/images" class="btn btn-primary mt-2">Edit</a>
     </div>
 </div>
