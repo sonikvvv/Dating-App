@@ -2,7 +2,7 @@
 
 <% const filter = user.filter %>
 
-<div class="card">
+<div class="card mb-3">
     <div class="card-body">
         <h5 class="card-title">Filter</h5>
         <ul class="list-group list-group-flush">
@@ -51,15 +51,15 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card mb-3">
     <div class="card-body">
         <h5 class="card-title">Photos</h5>
         <ul class="list-group list-group-flush">
-            <div class="row row-cols-1 row-cols-md-2 g-4">
-                <% if (user.images && user.images.lenght != 0) { %>
+            <div class="row row-cols-1 row-cols-md-5 g-4">
+                <% if (user.images && user.images.length != 0) { %>
                     <% user.images.map(img => { %>
-                    <div class="col">
-                        <div class="card" style="width: 10rem;">
+                    <div class="col d-inline-flex">
+                        <div class="card">
                             <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="..." />
                         </div>
                     </div>

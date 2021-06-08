@@ -114,11 +114,15 @@ io.on('connection', (socket) => {
         const senderSocket = chatUsers[data.sender].socket;
         const chatParticipants = await User.find({ username: { $in: [data.sender, data.receiver] } });
         const chat = await Chat.findOne({
-            participants: { $in: [
-                ObjectId(chatParticipants[0]._id),
-                ObjectId(chatParticipants[1]._id),
-            ]},
-        }).populate('messages');
+            participants: {
+                $in: [
+                    ObjectId(chatParticipants[0]._id),
+                    ObjectId(chatParticipants[1]._id),
+                ],
+            },
+        })
+            .populate("messages")
+            .populate("participants");
         io.to(senderSocket).emit('chat history', chat);
     });
 

@@ -1,0 +1,64 @@
+.receiver {
+    margin-right: 20rem;
+    justify-content: start;
+}
+
+.chat_card:hover {
+    background-color: rgba(128, 128, 128, 0.199);
+}
+
+.chat_card_selected {
+    background-color: rgba(128, 128, 128, 0.199);
+}
+
+.message {
+    padding-bottom: 0.85rem;
+    padding-top: 0.65rem;
+    border-radius: 1.5rem;
+    text-align: start;
+    padding-left: 0.8rem;
+    font-size: medium;
+    font-weight: normal;
+    line-height: 1.2rem;
+}
+
+.sender {
+    margin-left: 15rem;
+    justify-content: flex-end;
+}
+
+.messages {
+    height: 65vh;
+    overflow: auto;
+}
+
+.image {
+    width: 10rem;
+    height: 15rem;
+    display: flex;
+    justify-content: center;
+}
+
+.small-icon {
+    font-size: 2rem;
+}
+
+.big-icon {
+    font-size: 10rem;
+}
+
+.input-img {
+    width: 15rem;
+}
+
+.tag {
+    font-size: medium;
+    padding-bottom: 0.5rem;
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 2x solid rgba(0, 0, 0, 0.05);
+}

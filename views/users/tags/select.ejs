@@ -7,19 +7,19 @@
                 <button type="submit" class="btn btn-primary ms-3">Save selected tags</button>
             </section>
             <section class="row row-cols-auto g-3">
-                <% tags.forEach(tag=> { %>
+                <% tags.forEach(tag => { %>
                     <div class="col">
                         <input type="checkbox" class="btn-check" id="<%= tag.title %>" autocomplete="off" name="tags"
                             value="<%= tag._id %>"
-                            <% if (tag.selected && tag.selected==1) { %>
+                            <% if (tag.selected && tag.selected == 1) { %>
                                 checked
                             <% } %>
-                        >
-                        <label class="btn btn-outline-secondary rounded-pill text-nowrap" for="<%= tag.title %>">
-                            <%= tag.title %>
-                        </label>
+                            >
+                            <label class="btn btn-outline-secondary rounded-pill text-nowrap" for="<%= tag.title %>">
+                                <%= tag.title %>
+                            </label>
                     </div>
-                <% }) %>
+                    <% }) %>
             </section>
         </form>
     </div>
