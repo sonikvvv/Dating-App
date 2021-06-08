@@ -22,8 +22,6 @@ const { ObjectId } = require("mongodb");
 
 
 //* routs
-const badgesRoutes = require('./routes/badges');
-const rulesRoutes = require('./routes/rules');
 const tagsRoutes = require('./routes/tags');
 const usersRoutes = require('./routes/users');
 const settingsRoutes = require("./routes/settings");
@@ -92,8 +90,6 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
-app.use('/badges', badgesRoutes);
-app.use('/rules', rulesRoutes);
 app.use('/tags', tagsRoutes);
 app.use('/users', usersRoutes);
 app.use('/settings', settingsRoutes);

@@ -25,7 +25,6 @@ const UserSchema = new Schema({
         enum: ["admin", "user"],
         default: "user",
     },
-    badges: [{ type: Schema.Types.ObjectId, ref: "Badge" }],
     images: [ImageSchema],
     years: Number,
     sex: {
@@ -87,11 +86,6 @@ const UserSchema = new Schema({
     nsfw: {
         type: String,
         enum: ["Yes", "No"],
-    },
-    level: {
-        type: String,
-        enum: ["Peasant", "Aristocrat", "King / Queen", "God Mode"],
-        default: "Peasant",
     },
     filter: {
         sex: { type: String },
