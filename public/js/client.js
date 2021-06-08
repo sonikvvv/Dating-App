@@ -3,7 +3,9 @@ let socket = io();
 let form = document.getElementById("form");
 let input = document.getElementById("input");
 let messages = document.getElementById("messages");
-const authorName = document.getElementById("username").innerText.replace(' ', '');
+const authorName = document
+    .getElementById("username")
+    .innerText.replace(" ", "");
 let receiverName;
 let chatID;
 let authorID;
@@ -15,9 +17,21 @@ socket.on("new user", (id) => {
     authorID = id;
 });
 
-const onUserSelected = (username) => {
+const onUserSelected = (username, element) => {
     messages.innerHTML = "";
     receiverName = username;
+
+    const cards = document.querySelectorAll(".chat_card");
+    console.log(cards);
+
+    cards.forEach(card => {
+        if(card.classList.contains("chat_card_selected")) {
+            card.classList.remove("chat_card_selected");
+        }
+    });
+
+    element.classList.add("chat_card_selected");
+
     socket.emit("chat history", { sender: authorName, receiver: receiverName });
 };
 
@@ -34,13 +48,19 @@ const addMessage = (msg, msgAuthor) => {
 
     container.appendChild(message);
     messages.appendChild(container);
+    messages.scrollTo(0, messages.scrollHeight);
 };
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     if (input.value) {
         let msg = input.value;
-        socket.emit("message", { message: msg, author: {authorName, authorID}, receiver: {receiverName, receiverID}, chatID });
+        socket.emit("message", {
+            message: msg,
+            author: { authorName, authorID },
+            receiver: { receiverName, receiverID },
+            chatID,
+        });
         addMessage(msg, authorID);
         input.value = "";
     }
@@ -48,17 +68,16 @@ form.addEventListener("submit", (e) => {
 
 socket.on("message", (data) => {
     addMessage(data.message, data.author.authorID);
-    // window.scrollTo(0, document.body.scrollHeight);
 });
 
 socket.on("chat history", (chat) => {
     chatID = chat._id;
-    chat.participants.forEach(id => {
+    chat.participants.forEach((id) => {
         receiverID = id != authorID ? id : null;
     });
 
-    if (chat.messages.lenght != 0){
-        chat.messages.forEach( msg => {
+    if (chat.messages.length != 0) {
+        chat.messages.forEach((msg) => {
             addMessage(msg.content, msg.sender);
         });
     }

@@ -4,7 +4,7 @@
 	<section class="container d-flex flex-row my-2">
 		<section class="container col-md-4">
 			<% for( let user of users ) { %>
-				<div class="card mb-3 chat_card" onclick="onUserSelected(this.innerText)">
+				<div class="card mb-3 chat_card" onclick="onUserSelected(this.innerText, this)">
 					<div class="row g-0">
 						<div class="col-md-3">
 							<img src="<%= (user.images.length != 0) ?
@@ -24,24 +24,24 @@
 				</div>
 				<% } %>
 		</section>
-		<section class="container col-md-8">
-			<div class="container d-grid gap-2 my-auto" id="messages"></div>
-			<div class="container">
+		<section class="container col-md-8 g-3 card chat p-3">
+			<div class="container d-grid gap-2 my-auto messages" id="messages"></div>
+			<div class="container mt-3">
 				<form action="" id="form">
-					<div class="d-flex flex-row">
-						<input type="text" class="form-control" id="input" />
-						<button class="btn btn-primary">Send</button>
+					<div class="d-flex flex-row input-group">
+						<input type="text" class="form-control" id="input" placeholder="Message..." aria-label="Recipient's username" aria-describedby="button-addon2"/>
+						<button class="btn btn-outline-secondary" id="button-addon2">Send</button>
 					</div>
 				</form>
 			</div>
 		</section>
 	</section>
 	<% } else { %>
-		<sectio class="container d-flex justify-content-center">
+		<section class="container d-flex justify-content-center">
 			<div class="alert alert-light">
 				<h3>WOW no chats. Go make <a href="/users/discover" class="alert-link">matches</a>.</h3>
 			</div>
-		</sectio>
+		</section>
 	<% } %>
 
 	<script src="/socket.io/socket.io.js"></script>
