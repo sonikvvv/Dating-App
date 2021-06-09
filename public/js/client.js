@@ -22,7 +22,7 @@ const onUserSelected = (username, element) => {
     receiverName = username;
 
     const cards = document.querySelectorAll(".chat_card");
-    console.log(cards);
+    // console.log(cards);
 
     cards.forEach(card => {
         if(card.classList.contains("chat_card_selected")) {

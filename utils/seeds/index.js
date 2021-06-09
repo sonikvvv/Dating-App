@@ -1,11 +1,7 @@
 const mongoose = require("mongoose");
 const Tag = require("../models/tagModel");
-const Rule = require("../models/ruleModel");
-const Badge = require("../models/badgeModel");
 const User = require('../models/userModel');
 
-const badgeSeeds = require("./badgeSeeds");
-const ruleSeeds = require("./ruleSeeds");
 const tagSeeds = require("./tagSeeds");
 const userSeeds = require("./userSeeds");
 const { userSchema } = require("../validationSchemas");
@@ -31,25 +27,6 @@ const seedDB = async () => {
         await tag.save();
     }
 
-    await Rule.deleteMany({});
-    for (let i = 0; i < ruleSeeds.length; i++) {
-        const rule = new Rule({
-            title: ruleSeeds[i].title,
-            description: ruleSeeds[i].description,
-        });
-        await rule.save();
-    }
-
-    await Badge.deleteMany({});
-    for (let i = 0; i < badgeSeeds.length; i++) {
-        const badge = new Badge({
-            title: badgeSeeds[i].title,
-            description: badgeSeeds[i].description,
-            image: badgeSeeds[i].image,
-        });
-        await badge.save();
-    }
-
     await User.deleteMany({});
     for (let i = 0; i < userSeeds.length; i++) {
         const user = new User({
@@ -63,7 +40,7 @@ const seedDB = async () => {
             position: userSeeds[i].position,
             height: userSeeds[i].height,
             weight: userSeeds[i].weight,
-            bodytype: userSeeds[i].bodytype,
+            bodyType: userSeeds[i].bodytype,
             relationshipStatus: userSeeds[i].relationshipStatus,
             nsfw: userSeeds[i].nsfw,
         });
