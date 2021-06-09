@@ -1,12 +1,18 @@
 <% layout('layouts/boilerplate') %>
 
-    <section class="container">
-        <form action="/users/register" method="POST" class="d-flex flex-column needs-validation" novalidate>
+    <div class="container justify-content-center align-items-center mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4 ">
+            <div class="card shadow">
+                <img src="/images/photo.jpg" alt="" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Register</h5>
+                    <form action="/users/register" method="POST" class="d-flex flex-column needs-validation" novalidate>
             <h2>Register</h2>
 
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="username" placeholder="Names" name="user[username]"
-                    required />
+                   autofocus required />
                 <label for="username">Username</label>
             </div>
 
@@ -28,7 +34,10 @@
 
             <button class="btn btn-primary">Submit</button>
         </form>
-        <p class="d-flex justify-content-center">
-            You have an account?<a class="ms-1" href="/users/login">login</a>
-        </p>
-    </section>
+                    <p class="d-flex justify-content-center">You don't have an account?<a class="ms-1"
+                href="/users/register">register</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
