@@ -12,7 +12,7 @@ module.exports.registerSchema = Joi.object({
     user: Joi.object({
         username: Joi.string().required(),
         email: Joi.string().email().required(),
-        years: Joi.number().required(),
+        years: Joi.number().min(18).max(130).required(),
         password: Joi.string().required(),
     }).required(),
 });
