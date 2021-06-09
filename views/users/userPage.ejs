@@ -36,8 +36,11 @@
                 <h1><b>
                         <%= user.username %>
                     </b>
-                    <%= user.years %> <a href="/users/<%= user._id %>/edit"><i
+                    <%= user.years %> 
+                    <% if(currentUser && user.equals(currentUser)) {%>
+                        <a href="/users/<%= user._id %>/edit"><i
                                 class="bi bi-pencil small-icon text-dark"></i></a>
+                    <% } %>
                 </h1>
                 <h5><%= user.orientation %>
                     <%= user.sex %></h5>
