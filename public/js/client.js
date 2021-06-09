@@ -37,7 +37,7 @@ const onUserSelected = (username, element) => {
 
 const addMessage = (msg, msgAuthor) => {
     let container = document.createElement("div");
-    container.classList.add("d-flex");
+    container.classList.add("d-flex", "my-2");
 
     if (msgAuthor == authorID) container.classList.add("sender");
     else container.classList.add("receiver");

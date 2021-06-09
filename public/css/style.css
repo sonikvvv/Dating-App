@@ -1,6 +1,7 @@
 .receiver {
     margin-right: 20rem;
     justify-content: start;
+    height: 2.5rem;
 }
 
 .chat_card:hover {
@@ -25,6 +26,7 @@
 .sender {
     margin-left: 15rem;
     justify-content: flex-end;
+    height: 2.5rem;
 }
 
 .messages {
