@@ -10,7 +10,7 @@ const {
     isLoggedIn,
 } = require("../utils/middleware");
 const { ObjectId } = require("mongodb");
-const Chat = require('../utils/models/chatModel');
+const Chat = require("../utils/models/chatModel");
 const Tag = require("../utils/models/tagModel");
 
 router.get(
@@ -74,12 +74,14 @@ router.get(
     isLoggedIn,
     catchAsync(async (req, res) => {
         let chatUserIds = [];
+
         req.user.liked.forEach((el) => {
             if (el.chatId) {
                 chatUserIds.push(el.userId);
             }
         });
-        let users = await User.find({_id: {$in: chatUserIds}});
+
+        let users = await User.find({ _id: { $in: chatUserIds } });
         res.render("users/chats/chatsPage", { users });
     })
 );
@@ -116,7 +118,9 @@ router.get(
         if (filter.bodyType || filter.bodyType != "")
             excludeFilter.bodyType = filter.bodyType;
 
-        const user = await User.findOne(excludeFilter);
+        const user = await User.findOne(excludeFilter)
+            .populate("images")
+            .populate("tags");
         res.render("users/discover/discoverPage", { user });
     })
 );
@@ -127,7 +131,7 @@ router.get(
     catchAsync(async (req, res) => {
         const { id, liked } = req.params;
         const user = req.user;
-        
+
         if (liked == "true") {
             const likedUser = await User.findById(id);
             if (likedUser.liked.length != 0) {
@@ -207,7 +211,7 @@ router.get(
     "/:id",
     catchAsync(async (req, res) => {
         const { id } = req.params;
-        const user = await User.findById(id).populate('tags');
+        const user = await User.findById(id).populate("tags");
         res.render("users/userPage", { user });
     })
 );
@@ -223,7 +227,8 @@ router.get(
 router.put(
     "/:id",
     validateUser,
-    catchAsync(async (req, res) => { // TODO: Fix the disapiring images and tags
+    catchAsync(async (req, res) => {
+        // TODO: Fix the disapiring images and tags
         const { id } = req.params;
         const user = await User.findByIdAndUpdate(id, { ...req.body.user });
         res.render("users/userPage", { user });
