@@ -69,3 +69,14 @@
         <a href="/settings/images" class="btn btn-primary mt-2">Edit</a>
     </div>
 </div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">Delete profile</h5>
+        <% if(currentUser && user.equals(currentUser)) {%>
+            <form action="/users/<%= user._id %>?_method=DELETE" method="post">
+                <button class="btn btn-danger">Delete profile</button>
+            </form>
+        <% } %>
+    </div>
+</div>

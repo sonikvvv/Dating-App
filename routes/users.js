@@ -137,14 +137,17 @@ router.get(
                         const chat = new Chat();
                         chat.participants.push(user._id, id);
                         chat.save();
+
                         user.liked.push({ userId: id, chatId: chat._id });
                         likedUser.liked[index].chatId = chat._id;
+
                         await User.findByIdAndUpdate(id, { ...likedUser });
+
                         req.flash("success", "You have a match!");
                         break;
                     }
                 }
-            } else  {
+            } else {
                 user.liked.push({ userId: id });
                 await User.findByIdAndUpdate(user._id, { ...user });
             }
@@ -154,15 +157,6 @@ router.get(
         res.redirect("/users/discover");
     })
 );
-    
-router.get("/settings", isLoggedIn, (req, res) => {
-    const filter = req.user.filter;
-    res.render("users/settings/settings", { filter });
-});
-
-router.get("/settings/edit", isLoggedIn, (req, res) => {
-    res.render("users/settings/edit");
-});
 
 router.post(
     "/settings",
