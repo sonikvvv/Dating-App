@@ -7,12 +7,13 @@ const multer = require("multer");
 const { storage, cloudinary } = require("../cloudinary");
 const upload = multer({ storage });
 const { isLoggedIn } = require("../utils/middleware");
+const Tag = require("../utils/models/tagModel");
 
 router.get(
     "/",
     isLoggedIn,
     catchAsync(async (req, res) => {
-        const user = await User.findById(req.user._id).populate("images");
+        const user = await User.findById(req.user._id).populate("images").populate("tags");
         res.render("users/settings/settings", { user });
     })
 );
@@ -30,6 +31,39 @@ router.post(
 
         await User.findByIdAndUpdate(user._id, { ...user });
         res.redirect("/users/discover");
+    })
+);
+
+router.get(
+    "/tags",
+    isLoggedIn,
+    catchAsync(async (req, res) => {
+        const userTags = req.user.tags;
+        const allTags = await Tag.find({});
+        let tags = [];
+        allTags.forEach((tag) => {
+            if (userTags.indexOf(tag._id) > -1) {
+                tag.selected = 1;
+            }
+            tags.push(tag);
+        });
+        res.render("users/tags/select", { tags });
+    })
+);
+
+router.post(
+    "/tags",
+    isLoggedIn,
+    catchAsync(async (req, res) => {
+        const user = req.user;
+        if (req.body.tags) {
+            user.tags = [];
+            req.body.tags.forEach((tagId) => {
+                user.tags.push(tagId);
+            });
+            await User.findByIdAndUpdate(user._id, { ...user });
+        }
+        res.redirect(`/settings`);
     })
 );
 

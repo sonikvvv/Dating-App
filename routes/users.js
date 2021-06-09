@@ -11,7 +11,6 @@ const {
 } = require("../utils/middleware");
 const { ObjectId } = require("mongodb");
 const Chat = require("../utils/models/chatModel");
-const Tag = require("../utils/models/tagModel");
 
 router.get(
     "/",
@@ -162,51 +161,6 @@ router.get(
     })
 );
 
-router.post(
-    "/settings",
-    isLoggedIn,
-    catchAsync(async (req, res) => {
-        const user = req.user;
-        user.filter = req.body.filter;
-
-        await User.findByIdAndUpdate(user._id, { ...user });
-        res.redirect("/users/discover");
-    })
-);
-
-router.get(
-    "/tags",
-    isLoggedIn,
-    catchAsync(async (req, res) => {
-        const userTags = req.user.tags;
-        const allTags = await Tag.find({});
-        let tags = [];
-        allTags.forEach((tag) => {
-            if (userTags.indexOf(tag._id) > -1) {
-                tag.selected = 1;
-            }
-            tags.push(tag);
-        });
-        res.render("users/tags/select", { tags });
-    })
-);
-
-router.post(
-    "/tags",
-    isLoggedIn,
-    catchAsync(async (req, res) => {
-        const user = req.user;
-        if (req.body.tags) {
-            user.tags = [];
-            req.body.tags.forEach((tagId) => {
-                user.tags.push(tagId);
-            });
-            await User.findByIdAndUpdate(user._id, { ...user });
-        }
-        res.redirect(`/users/${user._id}`);
-    })
-);
-
 router.get(
     "/:id",
     catchAsync(async (req, res) => {
@@ -228,7 +182,6 @@ router.put(
     "/:id",
     validateUser,
     catchAsync(async (req, res) => {
-        // TODO: Fix the disapiring images and tags
         const { id } = req.params;
         const user = await User.findByIdAndUpdate(id, { ...req.body.user });
         res.render("users/userPage", { user });

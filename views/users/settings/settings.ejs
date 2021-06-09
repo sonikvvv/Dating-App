@@ -72,6 +72,22 @@
 
 <div class="card mb-3">
     <div class="card-body">
+        <h5 class="card-title">Tags</h5>
+        <div class="my-3">
+            <% if (user.tags.length !==0) { %>
+                <% for( let tag of user.tags ) { %>
+                    <span class="badge rounded-pill bg-secondary tag">
+                        <%= tag.title %>
+                    </span>
+                <% } %>
+            <% } %>
+        </div>
+        <a href="/settings/tags" class="btn btn-primary mt-2">Edit</a>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
         <h5 class="card-title">Delete profile</h5>
         <% if(currentUser && user.equals(currentUser)) {%>
             <form action="/users/<%= user._id %>?_method=DELETE" method="post">
