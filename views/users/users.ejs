@@ -1,9 +1,20 @@
 <% layout('layouts/boilerplate') %>
 
 <section class="container">
-    <ul>
+    <div class="row g-3">
         <% for( let user of users ) { %>
-        <li><a href="/users/<%= user._id %>"><%= user.username %></a></li>
+            <div class="col">
+                <div class="card text-white user-card">
+                    <img src="<%= user.images[0]? user.images[0].thumbnail:" ../images/yuriy-mlcn-3MORfl6x1Yg-unsplash.jpg" %>"
+                    class="card-img" alt="...">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">
+                            <%= user.username %> <a href="/users/<%= user._id %>"><i
+                                        class="bi bi-info-circle-fill text-light"></i></a>
+                        </h5>
+                    </div>
+                </div>
+            </div>
         <% } %>
-    </ul>
+    </div>
 </section>
