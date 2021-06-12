@@ -6,6 +6,7 @@ const { validateTag, isLoggedIn, isAdmin } = require("../utils/middleware");
 
 router.get(
     "/",
+    isAdmin,
     catchAsync(async (req, res) => {
         const tags = await Tag.find({});
         res.render("tags/tags", { tags });
@@ -30,6 +31,7 @@ router.post(
 
 router.get(
     "/:id",
+    isAdmin,
     catchAsync(async (req, res) => {
         const tag = await Tag.findById(req.params.id);
         res.render("tags/tag", { tag });

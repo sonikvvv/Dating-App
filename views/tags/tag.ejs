@@ -1,12 +1,15 @@
 <% layout('layouts/boilerplate') %>
 
-<section class="container">
-    <h2><%= tag.title %></h2>
-    <a href="/tags">ALL</a>
-    <% if (currentUser && currentUser.access == "admin") { %>
-    <a href="/tags/<%= tag._id %>/edit">edit</a>
-    <form action="/tags/<%= tag._id %>?_method=DELETE" method="post">
-        <button class="btn btn-danger">Delete</button>
-    </form>
-    <% } %>
-</section>
+    <section class="container">
+        <h2>
+            <%= tag.title %>
+        </h2>
+        <a href="/tags">ALL</a>
+        
+        <% if (currentUser && currentUser.access=="admin" ) { %>
+            <a href="/tags/<%= tag._id %>/edit">edit</a>
+            <form action="/tags/<%= tag._id %>?_method=DELETE" method="post">
+                <button class="btn btn-danger">Delete</button>
+            </form>
+        <% } %>
+    </section>
