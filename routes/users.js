@@ -8,12 +8,14 @@ const {
     validateUser,
     validateRegister,
     isLoggedIn,
+    isAdmin,
 } = require("../utils/middleware");
 const { ObjectId } = require("mongodb");
 const Chat = require("../utils/models/chatModel");
 
 router.get(
     "/",
+    isAdmin,
     catchAsync(async (req, res) => {
         const users = await User.find({});
         res.render("users/users", { users });
