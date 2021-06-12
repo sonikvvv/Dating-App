@@ -12,6 +12,10 @@
                 <% if (currentUser) { %>
                     <a class="nav-link" href="/settings/filter">Filter</a>
                 <% } %>
+                <% if (currentUser.access == "admin") { %>
+                    <a class="nav-link" href="/tags">Tags</a>
+                    <a class="nav-link" href="/users">Users</a>
+                <% } %>
             </div>
             <div class="navbar-nav ms-auto">
                 <% if (!currentUser) { %>
