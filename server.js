@@ -18,7 +18,7 @@ const LocalStrategy = require("passport-local");
 const User = require("./utils/models/userModel");
 const Chat = require("./utils/models/chatModel");
 const Message = require("./utils/models/messageModel");
-const { ObjectId } = require("mongodb");
+const MongoDBStore = require("connect-mongo");
 
 //* routs
 const tagsRoutes = require("./routes/tags");
@@ -26,7 +26,8 @@ const usersRoutes = require("./routes/users");
 const settingsRoutes = require("./routes/settings");
 
 //* db connection
-mongoose.connect("mongodb://localhost:27017/dating-app", {
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/dating-app";
+mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -48,8 +49,21 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
 //* session settings
+const secret = process.env.SECRET || "this-should-be-a-secret";
+const store = MongoDBStore.create({
+    mongoUrl: dbUrl,
+    autoRemove: 'native',
+    touchAfter: 24 * 60 * 60,
+    secret
+});
+
+store.on("error", function (e) {
+    console.log("Session store error", e);
+})
+
 const sessionConfig = {
-    secret: "this-shoud-be-a-secret",
+    store,
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -72,7 +86,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use(flash());
 
 app.use((req, res, next) => {
-    res.locals.currentUser = req.user;
+    res.locals.currentUser = req.user || null;
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     next();
@@ -160,6 +174,7 @@ app.use((err, req, res, next) => {
 });
 
 //* port
-server.listen(3000, () => {
-    console.log("Server started on port 3000.");
+const port = process.env.PORT || 3000;
+server.listen(port, () => {
+    console.log(`Server started on port ${port}.`);
 });
